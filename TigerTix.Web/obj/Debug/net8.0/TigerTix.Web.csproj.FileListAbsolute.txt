@@ -24,3 +24,6 @@ c:\Users\Ben\Documents\projects\c#\tigertix\TigerTix.Web\obj\Debug\net8.0\refint
 c:\Users\Ben\Documents\projects\c#\tigertix\TigerTix.Web\obj\Debug\net8.0\TigerTix.Web.pdb
 c:\Users\Ben\Documents\projects\c#\tigertix\TigerTix.Web\obj\Debug\net8.0\TigerTix.Web.genruntimeconfig.cache
 c:\Users\Ben\Documents\projects\c#\tigertix\TigerTix.Web\obj\Debug\net8.0\ref\TigerTix.Web.dll
+C:\Users\Ben\Documents\projects\c#\tigertix\TigerTix.Web\obj\Debug\net8.0\TigerTix.Web.RazorAssemblyInfo.cache
+C:\Users\Ben\Documents\projects\c#\tigertix\TigerTix.Web\obj\Debug\net8.0\TigerTix.Web.RazorAssemblyInfo.cs
+C:\Users\Ben\Documents\projects\c#\tigertix\TigerTix.Web\obj\Debug\net8.0\TigerTix.Web.sourcelink.json
