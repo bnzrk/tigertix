@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TigerTix.Web.Models;
 
 namespace TigerTix.Web.Controllers
 {
@@ -6,7 +7,12 @@ namespace TigerTix.Web.Controllers
     {
         public IActionResult Index()
         {
-            Console.WriteLine("Index action method invoked");
+            return View();
+        }
+
+        [HttpPost("/App")]
+        public IActionResult Index(IndexViewModel model)
+        {
             return View();
         }
     }
