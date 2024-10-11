@@ -1,3 +1,15 @@
+**/appsettings.json
+/build/
+*.suo
+*.user
+*.sdf
+bin/
+obj/
+Debug/
+Release/
+*.opensdf
+*.tlog
+*.log
 launch.json
 .vscode
 .vs

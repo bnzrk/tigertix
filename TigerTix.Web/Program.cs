@@ -1,5 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using TigerTix.Web.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<TigerTixContext>(cfg =>
+{
+    cfg.UseSqlServer();
+});
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 
