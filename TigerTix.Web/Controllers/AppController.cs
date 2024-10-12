@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TigerTix.Web.Data;
+using TigerTix.Web.Data.Entities;
 using TigerTix.Web.Models;
 
 namespace TigerTix.Web.Controllers
 {
     public class AppController : Controller
     {
-        private readonly TigerTixContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public AppController(TigerTixContext context)
+        public AppController(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         public IActionResult Index()
@@ -26,7 +27,7 @@ namespace TigerTix.Web.Controllers
 
         public IActionResult ShowUsers()
         {
-            var results = from u in _context.Users select u;
+            var results = from u in _userRepository.GetAllUsers() select u;
             return View(results.ToList());
         }
     }

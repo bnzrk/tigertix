@@ -2,9 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using TigerTix.Web.Data;
+using TigerTix.Web.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddDbContext<TigerTixContext>(cfg =>
 {
     cfg.UseSqlServer();
