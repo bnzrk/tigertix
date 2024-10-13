@@ -5,6 +5,7 @@ namespace TigerTix.Web.Models
     public class IndexViewModel
     {
         [Required]
-        public string UserName { get; set; }
-    }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+	}
 }

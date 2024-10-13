@@ -1,0 +1,19 @@
+﻿@model IEnumerable<User>
+
+<script src="/_framework/aspnetcore-browser-refresh.js"></script>
+<h1> Users </h1>
+<table>
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>CUID</th>
+    </tr>
+	@foreach (var u in Model)
+	{
+        <tr>
+		<td>@u.FirstName</td>
+        <td>@u.LastName</td>
+        <td>@u.Id</td>
+        </tr>
+	}
+</table>
