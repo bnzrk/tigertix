@@ -23,9 +23,9 @@ namespace TigerTix.Web.Controllers
         }
 
         [HttpPost("/App")]
-        public IActionResult Index(User model)
+        public IActionResult Index(User user)
         {
-            _userRepository.SaveUser(model);
+            _userRepository.SaveUser(user);
             _userRepository.SaveAll();
 
             return View();
@@ -47,36 +47,19 @@ namespace TigerTix.Web.Controllers
             return View(results.ToList());
         }
 
-        [HttpPost]
-        public IActionResult CreateEvent(Event model) {
-            if (ModelState.IsValid) {
-                _eventRepository.SaveEvent(model);
-                _eventRepository.SaveAll();
+        public IActionResult CreateEvent()
+        {
+            return View();
+        }
 
-                return RedirectToAction("ShowEvents");
+        [HttpPost("App/CreateEvent")]
+        public IActionResult CreateEvent(Event eventListing) {
+            if (ModelState.IsValid) {
+                _eventRepository.SaveEvent(eventListing);
+                _eventRepository.SaveAll();
             }
             return View();
         }
 
-        [HttpGet]
-        public IActionResult UpdateEvent(int id) {
-            var eventModel = _eventRepository.GetEventByID(id);
-            if (eventModel == null) {
-                return NotFound();
-            }
-            return View(eventModel);
-        }
-
-        public IActionResult DeleteEvent(int id) {
-            var eventModel = _eventRepository.GetEventByID(id);
-            if (eventModel == null) {
-                return NotFound();
-            }
-
-            _eventRepository.DeleteEvent(eventModel);
-            _eventRepository.SaveAll();
-
-            return RedirectToAction("ShowEvents");
-        }
     }
 }
