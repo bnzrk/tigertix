@@ -41,13 +41,10 @@ namespace TigerTix.Web.Controllers
 
 
         public IActionResult ShowEvents() {
-            var events = _eventRepository.GetAllEvents();
-            return View(events.ToList());
-        }
-        
-        [HttpGet]
-        public IActionResult CreateEvent() {
-            return View();
+            var results = from e in _eventRepository.GetAllEvents()
+                          select e;
+
+            return View(results.ToList());
         }
 
         [HttpPost]
@@ -58,7 +55,7 @@ namespace TigerTix.Web.Controllers
 
                 return RedirectToAction("ShowEvents");
             }
-            return View(model);
+            return View();
         }
 
         [HttpGet]

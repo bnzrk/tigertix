@@ -23,7 +23,7 @@ namespace TigerTix.Web.Data.Entities
 
         public Event GetEventByID(int eventID)
         {
-            // Get first matching user entry or default if not found
+            // Get first matching event entry or default if not found
             var tigerTixEvent = (from e in _context.Events where e.Id == eventID select e).FirstOrDefault();
             return tigerTixEvent;
         }
