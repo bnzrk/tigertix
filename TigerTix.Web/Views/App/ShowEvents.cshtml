@@ -1,0 +1,20 @@
+@model IEnumerable<Event>
+
+<h1> Events </h1>
+<table>
+    <tr>
+        <th>Event ID</th>
+        <th>Day</th>
+        <th>Month</th>
+        <th>Year</th>
+    </tr>
+    @foreach (var e in Model)
+    {
+        <tr>
+            <td>@e.Id</td>
+            <td>@e.dateDay</td>
+            <td>@e.dateMonth</td>
+            <td>@e.dateYear</td>
+        </tr>
+    }
+</table>
