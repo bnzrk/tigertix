@@ -3,8 +3,9 @@ namespace TigerTix.Web.Data.Entities
     public class Event
     {
         public int Id { get; set; }
-        public int dateDay { get; set; }
-        public int dateMonth { get; set; }
-        public int dateYear { get; set; }
+        public string Name { get; set; }
+        public int DateDay { get; set; }
+        public int DateMonth { get; set; }
+        public int DateYear { get; set; }
     }
 }

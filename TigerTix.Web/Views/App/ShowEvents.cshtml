@@ -4,18 +4,18 @@
 <h1> Events </h1>
 <table>
     <tr>
-        <th>Event ID</th>
-        <th>Day</th>
-        <th>Month</th>
-        <th>Year</th>
+        <th>Event Name&emsp;</th>
+        <th>Day&emsp;</th>
+        <th>Month&emsp;</th>
+        <th>Year&emsp;</th>
     </tr>
     @foreach (var e in Model)
     {
         <tr>
-            <td>@e.Id</td>
-            <td>@e.dateDay</td>
-            <td>@e.dateMonth</td>
-            <td>@e.dateYear</td>
+            <td>@e.Name&emsp;</td>
+            <td>@e.DateDay&emsp;</td>
+            <td>@e.DateMonth&emsp;</td>
+            <td>@e.DateYear&emsp;</td>
         </tr>
     }
 </table>
