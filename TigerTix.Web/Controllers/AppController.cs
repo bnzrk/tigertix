@@ -22,8 +22,13 @@ namespace TigerTix.Web.Controllers
             return View();
         }
 
-        [HttpPost("/App")]
-        public IActionResult Index(User user)
+        public IActionResult CreateAccount()
+        {
+            return View();
+        }
+
+        [HttpPost("App/CreateAccount")]
+        public IActionResult CreateAccount(User user)
         {
             _userRepository.SaveUser(user);
             _userRepository.SaveAll();

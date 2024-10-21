@@ -2,7 +2,7 @@
 
 namespace TigerTix.Web.Models
 {
-    public class IndexViewModel
+    public class UserViewModel
     {
         [Required]
         public string UserName { get; set; }

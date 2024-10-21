@@ -1,0 +1,32 @@
+﻿@model UserViewModel
+@{
+
+    ViewData["Title"] = "Account Creation";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TigerTix: @ViewData["Title"]</title>
+</head>
+<body>
+    <h1>Create Account </h1>
+
+    <form method="post">
+        <label>CUID:</label>
+        <br />
+        <input type="text" name="username" />
+        <br />
+        <label>FirstName:</label>
+        <br />
+        <input type="text" name="firstname" />
+        <br />
+        <label>LastName:</label>
+        <br />
+        <input type="text" name="lastname" />
+        <br />
+        <input type="submit" value="Create Account" />
+    </form>
+</body>
+</html>

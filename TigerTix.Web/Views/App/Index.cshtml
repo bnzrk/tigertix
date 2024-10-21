@@ -1,4 +1,4 @@
-﻿@model IndexViewModel
+﻿@model UserViewModel
     @{
 
         ViewData["Title"] = "Home Page";
@@ -11,22 +11,5 @@
         <title>TigerTix: @ViewData["Title"]</title>
     </head>
     <body>
-        <h1>Register User</h1>
-
-        <form method="post">
-            <label>CUID:</label>
-            <br />
-            <input type="text" name="username" />
-            <br />
-            <label>FirstName:</label>
-            <br />
-            <input type="text" name="firstname"/>
-            <br />
-            <label>LastName:</label>
-            <br />
-            <input type="text" name="lastname"/>
-            <br />
-            <input type="submit" value="Register"/>
-        </form>
     </body>
 </html>
