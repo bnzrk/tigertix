@@ -22,13 +22,13 @@ namespace TigerTix.Web.Controllers
             return View();
         }
 
-        public IActionResult CreateAccount()
+        public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost("App/CreateAccount")]
-        public IActionResult CreateAccount(User user)
+        [HttpPost("App/Register")]
+        public IActionResult Register(User user)
         {
             _userRepository.SaveUser(user);
             _userRepository.SaveAll();
@@ -64,6 +64,34 @@ namespace TigerTix.Web.Controllers
                 _eventRepository.SaveAll();
             }
             return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost("App/Login")]
+        public IActionResult Login(string username)
+        {
+            var user = _userRepository.GetUserByUsername(username);
+            if (user != null)
+            {
+                HttpContext.Session.SetString("Username", user.UserName);
+                return RedirectToAction("Login");
+            }
+
+            return View();
+        }
+
+        User GetSessionUser()
+        {
+            var sessionUsername = HttpContext.Session.GetString("Username");
+            if (sessionUsername == null)
+                return null;
+
+            var sessionUser = _userRepository.GetUserByUsername(sessionUsername);
+            return sessionUser;
         }
 
     }

@@ -12,8 +12,16 @@ builder.Services.AddDbContext<TigerTixContext>(cfg =>
 {
     cfg.UseSqlServer();
 });
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(2);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -23,10 +31,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.MapGet("/", () => Results.Redirect("/App"));
+app.MapGet("/", () => Results.Redirect("/app"));
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseRouting();
+app.UseRouting(); 
+app.UseSession();
 app.UseAuthorization();
 
 app.MapRazorPages();

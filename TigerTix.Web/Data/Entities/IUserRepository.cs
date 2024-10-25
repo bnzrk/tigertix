@@ -18,6 +18,9 @@ namespace TigerTix.Web.Data.Entities
         // Queries and returns a specific user from the database's User table by ID.
         User GetUserByID(int userID);
 
+        // Queries and returns a specific user from the database's User table by username.
+        User GetUserByUsername(string username);
+
         // Saves all changes to the database and returns whether any entries were affected.
         bool SaveAll();
     }

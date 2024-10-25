@@ -28,6 +28,12 @@
             return user;
         }
 
+        public User GetUserByUsername(string username)
+        {
+            var user = (from u in _context.Users where u.UserName == username select u).FirstOrDefault();
+            return user;
+        }
+
         public void UpdateUser(User user)
         {
             _context.Update(user);
