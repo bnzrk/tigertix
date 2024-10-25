@@ -9,14 +9,26 @@
 <head>
     <meta charset="utf-8" />
     <title>TigerTix: @ViewData["Title"]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
 </head>
-<body>
-    <form method="post">
-        <label>CUID:</label>
-        <br />
-        <input type="text" name="username" />
-        <br />
-        <input type="submit" value="Login" />
-    </form>
+<body class="focus-container-background">
+    <div class="focus-container">
+        <div class="tt-logo">
+            <span class="tt-logo-tiger">Tiger</span><span class="tt-logo-tix">Tix</span>
+        </div>
+        <h2>Log in</h2>
+        <form method="post">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Enter your CUID" required>
+            </div>
+            <button type="submit" class="main-button-round">Log in</button>
+        </form>
+        <div class="form-footer">
+            <p class="footer-text">Don't have an account? <a href="/app/register" class="footer-text">Sign up</a></p>
+        </div>
+    </div>
 </body>
 </html>
