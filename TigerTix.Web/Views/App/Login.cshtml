@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model LoginViewModel
 @{
 
     ViewData["Title"] = "Login";
@@ -22,9 +22,10 @@
         <h2>Log in</h2>
         <form method="post">
             <div class="form-group">
-                <input type="text" id="username" name="username" placeholder="Enter your CUID" required>
+                <input type="text" id="username" name="username" placeholder="CUID" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
-            <button type="submit" class="main-button-round">Log in</button>
+            <button type="submit" class="alt-button-round">Log in</button>
         </form>
         <div class="form-footer">
             <p class="footer-text">Don't have an account? <a href="/app/register" class="footer-text">Sign up</a></p>

@@ -28,8 +28,12 @@ namespace TigerTix.Web.Controllers
         }
 
         [HttpPost("App/Register")]
-        public IActionResult Register(User user)
+        public IActionResult Register(RegisterViewModel model)
         {
+            User user = new User();
+            user.UserName = model.UserName;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
             _userRepository.SaveUser(user);
             _userRepository.SaveAll();
 
@@ -72,12 +76,13 @@ namespace TigerTix.Web.Controllers
         }
 
         [HttpPost("App/Login")]
-        public IActionResult Login(string username)
+        public IActionResult Login(LoginViewModel model)
         {
-            var user = _userRepository.GetUserByUsername(username);
+            var user = _userRepository.GetUserByUsername(model.UserName);
             if (user != null)
             {
                 HttpContext.Session.SetString("Username", user.UserName);
+                Console.WriteLine("Logged in as " + user.FirstName + " " + user.LastName);
                 return RedirectToAction("Login");
             }
 

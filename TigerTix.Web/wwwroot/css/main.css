@@ -4,9 +4,56 @@
     background-color: #ffffff;
     margin: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
+    justify-content: left;
+}
+
+h1
+{
+    font-weight: normal;
+    text-align: left;
+    color: #333;
+    font-weight: normal;
+    font-size: 3em;
+}
+
+h2
+{
+    font-weight: normal;
+    text-align: center;
+    color: #333;
+    font-weight: normal;
+    font-size: 2em;
+}
+
+p
+{
+    font-family: "Inter Right", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"]
+{
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus
+{
+    border-color: #007bff;
+    background-color: #fff;
 }
 
 .focus-container-background
@@ -141,35 +188,6 @@ label
 {
     font-family: "Inter Tight", sans-serif;
     font-size: 14px;
-    font-weight: normal;
-    color: #333;
-}
-
-input[type="text"],
-input[type="password"]
-{
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    background-color: #f9f9f9;
-    font-size: 1em;
-    box-sizing: border-box;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus
-{
-    border-color: #007bff;
-    background-color: #fff;
-}
-
-p
-{
-    font-family: "Inter Right", sans-serif;
-    font-size: 16px;
     font-weight: normal;
     color: #333;
 }

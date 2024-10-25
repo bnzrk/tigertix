@@ -2,13 +2,11 @@
 
 namespace TigerTix.Web.Models
 {
-    public class UserViewModel
+    public class LoginViewModel
     {
         [Required]
         public string UserName { get; set; }
         [Required]
-		public string FirstName { get; set; }
-        [Required]
-		public string LastName { get; set; }
-	}
+        public string Password { get; set; } = string.Empty;
+    }
 }
