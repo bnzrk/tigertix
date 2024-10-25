@@ -1,0 +1,188 @@
+﻿body 
+{
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.focus-container-background
+{
+    font-family: 'Inter', sans-serif;
+    background-color: #f6f6fC;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+label
+{
+    display: block;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+.focus-container
+{
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+    margin: 0px 0px 96px 0px;
+}
+
+.focus-container h2
+{
+    font-weight: normal;
+    text-align: center;
+    color: #333;
+    font-weight: normal;
+    font-size: 1.5em;
+}
+
+.focus-container-header-old
+{
+    font-weight: normal;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.main-button-round
+{
+    display: block;
+    width: 50%;
+    background-color: #f56600;
+    color: white;
+    padding: 12px;
+    margin: 0 auto;
+    border: none;
+    border-radius: 24px;
+    font-size: 1em;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.main-button-round:hover
+{
+    background-color: #c44400;
+}
+
+.alt-button-round
+{
+    display: block;
+    width: 50%;
+    background-color: #693f9e;
+    color: white;
+    padding: 12px;
+    margin: 0 auto;
+    border: none;
+    border-radius: 24px;
+    font-size: 1em;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.alt-button-round:hover
+{
+    background-color: #4e297d;
+}
+
+.tt-logo
+{
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 2.5em;
+    text-align: center;
+    margin: auto;
+}
+
+.tt-logo-tiger
+{
+    color: #F56600;
+}
+
+.tt-logo-tix
+{
+    color: #693f9e;
+}
+
+.form-footer
+{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-footer a
+{
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.form-footer a:hover
+{
+    text-decoration: underline;
+}
+
+.footer-text
+{
+    font-family: "Inter Tight", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"]
+{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus
+{
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+p
+{
+    font-family: "Inter Right", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: #333;
+}
+
+.form-group
+{
+    margin-bottom: 20px;
+}
+
+.column-container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}  
