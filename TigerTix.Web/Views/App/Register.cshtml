@@ -49,7 +49,12 @@
             @Html.AntiForgeryToken()
 
             <div class="form-group">
-                <input asp-for="UserName" class="form-control" placeholder="CUID" required />
+                <input 
+                    type="text"
+                    asp-for="UserName"
+                    class="form-control"
+                    placeholder="CUID"
+                    required />
 
                 <div class="name-group">
                     <input asp-for="FirstName" class="form-control name-item" placeholder="First Name" required />
