@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.SqlServer;
@@ -12,6 +13,19 @@ builder.Services.AddDbContext<TigerTixContext>(cfg =>
 {
     cfg.UseSqlServer();
 });
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+
+    options.User.RequireUniqueEmail = true;
+    options.User.AllowedUserNameCharacters = "C1234567890";
+}).AddEntityFrameworkStores<TigerTixContext>();
+
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
@@ -21,6 +35,13 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(2);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    options.SlidingExpiration = false;
 });
 
 var app = builder.Build();

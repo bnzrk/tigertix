@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TigerTix.Web.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TigerTix.Web.Data
 {
-    public class TigerTixContext : DbContext
+    public class TigerTixContext : IdentityDbContext<ApplicationUser>
     {
         public TigerTixContext(IConfiguration config)
         {
@@ -20,7 +21,7 @@ namespace TigerTix.Web.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(_config["ConnectionStrings:DefaultConnection"]);
+            optionsBuilder.UseSqlServer(_config["ConnectionStrings:LocalConnection"]);
         }
     }
 }
