@@ -7,7 +7,7 @@ using TigerTix.Web.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddDbContext<TigerTixContext>(cfg =>
 {

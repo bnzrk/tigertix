@@ -13,7 +13,7 @@ namespace TigerTix.Web.Controllers
 {
     public class AppController : Controller
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IApplicationUserRepository _userRepository;
 
         private readonly IEventRepository _eventRepository;
 
@@ -21,7 +21,7 @@ namespace TigerTix.Web.Controllers
         
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AppController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IUserRepository userRepository, IEventRepository eventRepository)
+        public AppController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IApplicationUserRepository userRepository, IEventRepository eventRepository)
         {
             _userRepository = userRepository;
             _eventRepository = eventRepository;
@@ -118,7 +118,8 @@ namespace TigerTix.Web.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName
             };
-            var result = await _userManager.CreateAsync(user, model.Password);
+            //var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _userRepository.SaveUserAsync(user, model.Password);
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
@@ -140,7 +141,6 @@ namespace TigerTix.Web.Controllers
             return View(model);
         }
 
-        // TODO: Obsolete. Remove
         public IActionResult ShowUsers()
         {
             var results = from u in _userRepository.GetAllUsers()

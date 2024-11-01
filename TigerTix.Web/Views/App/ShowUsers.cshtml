@@ -1,19 +1,21 @@
-﻿@model IEnumerable<User>
+﻿@model IEnumerable<ApplicationUser>
 
 <script src="/_framework/aspnetcore-browser-refresh.js"></script>
 <h1> Users </h1>
 <table>
     <tr>
+        <th>CUID</th>
         <th>Firstname</th>
         <th>Lastname</th>
-        <th>CUID</th>
+        <th>Email</th>
     </tr>
 	@foreach (var u in Model)
 	{
         <tr>
+        <td>@u.UserName</td>
 		<td>@u.FirstName</td>
         <td>@u.LastName</td>
-        <td>@u.UserName</td>
+        <td>@u.Email</td>
         </tr>
 	}
 </table>
