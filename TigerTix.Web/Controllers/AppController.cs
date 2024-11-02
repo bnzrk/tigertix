@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing.Printing;
 using System.Security.Claims;
-using TigerTix.Web.Data;
 using TigerTix.Web.Data.Entities;
 using TigerTix.Web.Models;
 using System.Text.RegularExpressions;
