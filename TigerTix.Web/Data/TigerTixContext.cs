@@ -1,16 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TigerTix.Web.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TigerTix.Web.Data
 {
-    public class TigerTixContext : DbContext
+    public class TigerTixContext : IdentityDbContext<ApplicationUser>
     {
         public TigerTixContext(IConfiguration config)
         {
             _config = config;
         }
-
-        public DbSet<User> Users { get; set; }
 
         public DbSet<Event> Events { get; set; }
 
