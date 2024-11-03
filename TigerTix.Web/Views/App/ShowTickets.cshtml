@@ -1,0 +1,19 @@
+@model IEnumerable<Ticket>
+
+<script src="/_framework/aspnetcore-browser-refresh.js"></script>
+<h1> Tickets </h1>
+<table>
+    <tr>
+        <th>CUID&emsp;</th>
+        <th>Event Name&emsp;</th>
+        <th>Seat Number&emsp;</th>
+    </tr>
+    @foreach (var t in Model)
+    {
+        <tr>
+            <td>@t.CUID&emsp;</td>
+            <td>@t.TicketEvent&emsp;</td>
+            <td>@t.SeatNumber&emsp;</td>
+        </tr>
+    }
+</table>

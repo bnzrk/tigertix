@@ -13,14 +13,17 @@ namespace TigerTix.Web.Controllers
 
         private readonly IEventRepository _eventRepository;
 
+        private readonly ITicketRepository _ticketRepository;
+
         private readonly UserManager<ApplicationUser> _userManager;
         
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AppController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IApplicationUserRepository userRepository, IEventRepository eventRepository)
+        public AppController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IApplicationUserRepository userRepository, IEventRepository eventRepository, ITicketRepository ticketRepository)
         {
             _userRepository = userRepository;
             _eventRepository = eventRepository;
+            _ticketRepository = ticketRepository;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -165,6 +168,28 @@ namespace TigerTix.Web.Controllers
             if (ModelState.IsValid) {
                 _eventRepository.SaveEvent(eventListing);
                 _eventRepository.SaveAll();
+            }
+            return View();
+        }
+
+        public IActionResult ShowTickets() {
+            var results = from t in _ticketRepository.GetAllTickets()
+                          select t;
+
+            return View(results.ToList());
+        }
+
+        public IActionResult CreateTicket()
+        {
+            return View();
+        }
+
+        [HttpPost("App/CreateTicket")]
+        public IActionResult CreateTicket(Ticket ticketListing) 
+        {
+            if (ModelState.IsValid) {
+                _ticketRepository.SaveTicket(ticketListing);
+                _ticketRepository.SaveAll();
             }
             return View();
         }

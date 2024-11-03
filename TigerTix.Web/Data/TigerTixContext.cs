@@ -13,6 +13,8 @@ namespace TigerTix.Web.Data
 
         public DbSet<Event> Events { get; set; }
 
+        public DbSet<Ticket> Tickets { get; set; }
+
         private readonly IConfiguration _config;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
