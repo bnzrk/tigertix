@@ -4,6 +4,7 @@ using System.Security.Claims;
 using TigerTix.Web.Data.Entities;
 using TigerTix.Web.Models;
 using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace TigerTix.Web.Controllers
 {
@@ -163,10 +164,15 @@ namespace TigerTix.Web.Controllers
         }
 
         [HttpPost("App/CreateEvent")]
-        public IActionResult CreateEvent(Event eventListing) 
+        public IActionResult CreateEvent(EventViewModel eventModel) 
         {
             if (ModelState.IsValid) {
-                _eventRepository.SaveEvent(eventListing);
+                var eventEntity = new Event {
+                   EventName = eventModel.EventName,
+                   EventDate = eventModel.EventDate 
+                };
+
+                _eventRepository.SaveEvent(eventEntity);
                 _eventRepository.SaveAll();
             }
             return View();

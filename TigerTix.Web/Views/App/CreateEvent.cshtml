@@ -13,24 +13,26 @@
 <body>
     <h1>Event Info</h1>
 
-    <form method="post">
-        <label>Event Name:</label>
+    <form asp-action="CreateEvent" method="post">
+        <div><
+            <label asp-for="EventName"></label>
+            <br />
+            <input asp-for="EventName" class="form-control" />
+            <span asp-validation-for="EventName" class="text-danger"></span>
+        <div>
         <br />
-        <input type="text" name="name" />
-        <br />
-        <label>Month:</label>
-        <br />
-        <input type="number" name="datemonth" />
-        <br />
-        <label>Day</label>
-        <br />
-        <input type="number" name="dateday" />
-        <br />
-        <label>Year</label>
-        <br />
-        <input type="number" name="dateyear" />
+        <div>
+            <label asp-for="EventDate"></label>
+            <br />
+            <input asp-for="EventDate" class="form-control" type="datetime-local" />
+            <span asp-validation-for="EventDate" class="text-danger"></span>
+        </div>
         <br />
         <input type="submit" value="Create" />
     </form>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 </body>
 </html>

@@ -5,17 +5,13 @@
 <table>
     <tr>
         <th>Event Name&emsp;</th>
-        <th>Month&emsp;</th>
-        <th>Day&emsp;</th>
-        <th>Year&emsp;</th>
+        <th>Event Date&emsp;</th>
     </tr>
     @foreach (var e in Model)
     {
         <tr>
-            <td>@e.Name&emsp;</td>
-            <td>@e.DateMonth&emsp;</td>
-            <td>@e.DateDay&emsp;</td>
-            <td>@e.DateYear&emsp;</td>
+            <td>@e.EventName&emsp;</td>
+            <td>@e.EventDate&emsp;</td>
         </tr>
     }
 </table>
