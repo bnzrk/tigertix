@@ -172,6 +172,17 @@ namespace TigerTix.Web.Controllers
                    EventDate = eventModel.EventDate 
                 };
 
+                eventEntity.TicketList = new List<Ticket>();
+                for (int i = 1; i <= 10; i++) {
+                    var ticket = new Ticket {
+                        SeatNumber = i,
+                        TicketEvent = eventEntity,
+                        EventId = eventEntity.Id
+                    };
+
+                    eventEntity.TicketList.Add(ticket);
+                }
+
                 _eventRepository.SaveEvent(eventEntity);
                 _eventRepository.SaveAll();
             }
@@ -191,10 +202,16 @@ namespace TigerTix.Web.Controllers
         }
 
         [HttpPost("App/CreateTicket")]
-        public IActionResult CreateTicket(Ticket ticketListing) 
+        public IActionResult CreateTicket(TicketViewModel ticketModel) 
         {
             if (ModelState.IsValid) {
-                _ticketRepository.SaveTicket(ticketListing);
+                var ticketEntity = new Ticket {
+                    CUID = ticketModel.CUID,
+                    SeatNumber = ticketModel.SeatNumber,
+                    EventId = ticketModel.EventId
+                };
+
+                _ticketRepository.SaveTicket(ticketEntity);
                 _ticketRepository.SaveAll();
             }
             return View();

@@ -259,14 +259,15 @@ namespace TigerTix.Web.Migrations
                     b.Property<int>("CUID")
                         .HasColumnType("int");
 
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SeatNumber")
                         .HasColumnType("int");
 
-                    b.Property<string>("TicketEvent")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("EventId");
 
                     b.ToTable("Tickets");
                 });
@@ -320,6 +321,22 @@ namespace TigerTix.Web.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TigerTix.Web.Data.Entities.Ticket", b =>
+                {
+                    b.HasOne("TigerTix.Web.Data.Entities.Event", "TicketEvent")
+                        .WithMany("TicketList")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TicketEvent");
+                });
+
+            modelBuilder.Entity("TigerTix.Web.Data.Entities.Event", b =>
+                {
+                    b.Navigation("TicketList");
                 });
 #pragma warning restore 612, 618
         }

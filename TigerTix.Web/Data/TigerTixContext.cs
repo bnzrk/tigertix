@@ -23,5 +23,16 @@ namespace TigerTix.Web.Data
 
             optionsBuilder.UseSqlServer(_config["ConnectionStrings:DefaultConnection"]);
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Event>()
+                .HasMany(e => e.TicketList)
+                .WithOne(t => t.TicketEvent)
+                .HasForeignKey(t => t.EventId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            base.OnModelCreating(builder);
+        }
     }
 }
