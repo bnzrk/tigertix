@@ -4,6 +4,7 @@ namespace TigerTix.Web.Models
 {
     public class TicketViewModel
     {
+        public int Id { get; set; }
         [Required]
         public int CUID { get; set; }
         [Required]
