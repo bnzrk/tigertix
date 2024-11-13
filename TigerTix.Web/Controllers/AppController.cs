@@ -228,10 +228,6 @@ namespace TigerTix.Web.Controllers
         {
             return View();
         }
-        public IActionResult Profile()
-        {
-            return View();
-        }
 
     }
 }
