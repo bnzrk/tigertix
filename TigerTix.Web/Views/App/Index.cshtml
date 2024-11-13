@@ -9,8 +9,50 @@
     <head>
         <meta charset="utf-8" />
         <title>TigerTix: @ViewData["Title"]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
     </head>
+
     <body>
+        <!-- Start of Banner -->
+        <div id="TopBanner">
+        <div id="TopBannerLeft">
+            <div class="tt-logo">
+                <a href="/App/Index", class="NoHyperlinkUnderline">
+                <span class="tt-logo-tiger">Tiger</span><span class="tt-logo-tix">Tix</span>
+                </a>
+            </div>
+        </div>
+        <div id="TopBannerRight">
+            <a href="/App/Login" class="NoHyperlinkUnderline TopRightLink">Login</a>
+            <a href="/App/Register" class="NoHyperlinkUnderline TopRightLink">Register</a>
+            <a href="/App/Profile" class="NoHyperlinkUnderline TopRightLink">My Account</a>
+        </div>
+        </div>
+        <!-- End of Banner -->
+
+        <div id="HomeHeaderDiv">
+            <div class="tt-logo">
+                <span class="tt-logo-tiger">Tiger</span><span class="tt-logo-tix">Tix</span>
+                <span> | Home </span>
+            </div>
+            <p id="HomeHeaderDesc"> 
+                This is a placeholder description meant  | to fill space so I can see how big I want this section.
+                TigerTix is a web app that lets you reserve, buy, and send tickets to events at Clemson University.
+            </p>
+        </div>
+
+        <div id"TempRedirects">
+            <p> These are for our purposes.</p>
+            <p><a href="/App/Login">Login</a></p>
+            <p><a href="/App/Register">Register</a></p>
+            <p><a href="/App/CreateEvent">Create Event</a></p>
+            <p><a href="/App/ShowEvents">Show Events</a></p>
+            <p><a href="/App/ShowUsers">Show Users</a></p>
+        </div>
+
         <form asp-controller="" asp-action="Logout" method="post">
             <button type="submit">Logout</button>
         </form>

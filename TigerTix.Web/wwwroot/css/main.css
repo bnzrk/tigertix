@@ -66,7 +66,7 @@ input[type="password"]:focus
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
 }
 
 label
@@ -87,7 +87,7 @@ label
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 300px;
-    margin: 0px 0px 96px 0px;
+    margin: 20px 0px 96px 0px;
 }
 
 .focus-container h2
@@ -126,6 +126,9 @@ label
 {
     background-color: #c44400;
 }
+.main-button-round:active {
+    filter:brightness(85%);
+}
 
 .alt-button-round
 {
@@ -146,6 +149,9 @@ label
 .alt-button-round:hover
 {
     background-color: #4e297d;
+}
+.alt-button-round:active {
+    filter: brightness(85%);
 }
 
 .tt-logo
@@ -205,6 +211,94 @@ label
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}  
+/* home page css, can be moved */
+#HomeHeaderDiv {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(249, 250, 250);
+/*    border: solid white 2px;
+    border-radius: 20px;*/
+    padding: 40px;
+    box-sizing: border-box;
+}
+#HomeHeaderTitle
+{
+    margin: auto;
+    width: fit-content;
+    color: blue;
+    padding: 20px;
+}
+#HomeHeaderDesc {
+    font-size: 25px;
+    box-sizing: border-box;
+    margin: auto;
+    width: 75%;
+
+}
+#TopBanner
+{
+    --heightvar: 100px;
+    width: 100%;
+    height: var(--heightvar);
+    background-color: white;
+    border-top: solid 2px orange;
+    border-bottom: solid 2px orange;
+/*    margin-bottom: 20px;*/
+}
+#TopBanner #TopBannerLeft 
+{
+    position: absolute;
+    left: 25px;
+    top: 2%;
+}
+#TopBanner #TopBannerRight 
+{
+    position: absolute;
+    right: 25px;
+    top: 5%;
+}
+.NoHyperlinkUnderline
+{
+    text-decoration: none;
+}
+.TopRightLink
+{
+    height: 20px;
+    padding: 10px;
+    border: solid purple 2px;
+    border-radius: 10px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+.TopRightLink:hover 
+{
+    background-color: #CEC2EB;
+}
+.TopRightLink:active {
+    background-color: purple;
+    color: white;
+    transform: scale(0.9);
+}
+.ProfileContainer
+{
+    margin: 20px;
+    max-width: 750px;
+}
+.ProfileContainer h2
+{
+    text-align: left;
+    border-bottom: solid black 1px 
+}
+.ProfileContainer h1
+{
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    border: solid 1px black;
+    margin: 0px;
+}
 }
 
 .row

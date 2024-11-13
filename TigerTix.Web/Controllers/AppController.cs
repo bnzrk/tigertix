@@ -224,5 +224,10 @@ namespace TigerTix.Web.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             return user;
         }
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
     }
 }
