@@ -4,7 +4,6 @@ using System.Security.Claims;
 using TigerTix.Web.Data.Entities;
 using TigerTix.Web.Models;
 using System.Text.RegularExpressions;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace TigerTix.Web.Controllers
 {
@@ -34,7 +33,9 @@ namespace TigerTix.Web.Controllers
             var user = await GetCurrentUserAsync();
 
             if (user != null)
+            {
                 Console.WriteLine("Logged in as: " + user.FirstName + " " + user.LastName);
+            }
             else
                 Console.WriteLine("Not logged in.");
 
@@ -44,7 +45,7 @@ namespace TigerTix.Web.Controllers
         public IActionResult Login()
         {
             // Redirect if a user is already logged in
-            if (User.Identity?.IsAuthenticated == true)
+            if (UserIsLoggedIn())
             {
                 return RedirectToAction("Index");
             }
@@ -56,7 +57,7 @@ namespace TigerTix.Web.Controllers
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             // Redirect if a user is already logged in
-            if (User.Identity?.IsAuthenticated == true)
+            if (UserIsLoggedIn())
             {
                 return RedirectToAction("Index");
             }
@@ -79,7 +80,7 @@ namespace TigerTix.Web.Controllers
         public IActionResult Register()
         {
             // Redirect if a user is already logged in
-            if (User.Identity?.IsAuthenticated == true)
+            if (UserIsLoggedIn())
             {
                 return RedirectToAction("Index");
             }
@@ -92,7 +93,7 @@ namespace TigerTix.Web.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             // Redirect if a user is already logged in
-            if (User.Identity?.IsAuthenticated == true)
+            if (UserIsLoggedIn())
             {
                 return RedirectToAction("Index");
             }
@@ -224,9 +225,28 @@ namespace TigerTix.Web.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             return user;
         }
-        public IActionResult Profile()
+        public async Task<IActionResult> Profile()
         {
-            return View();
+            if (!UserIsLoggedIn())
+                return RedirectToAction("Index");
+
+            ProfileViewModel model = new ProfileViewModel();
+            ApplicationUser user = await GetCurrentUserAsync();
+
+            if (user == null)
+                return RedirectToAction("Index");
+
+            model.UserName = user.UserName;
+            model.FirstName = user.FirstName;
+            model.LastName = user.LastName;
+            model.Email = user.Email;
+
+            return View(model);
+        }
+
+        public bool UserIsLoggedIn()
+        {
+            return User.Identity?.IsAuthenticated == true;
         }
 
     }
