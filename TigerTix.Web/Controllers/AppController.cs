@@ -246,15 +246,7 @@ namespace TigerTix.Web.Controllers
             model.EventName = "Event Name";
             model.SeatNumber = 1;
 
-            UserTicketViewModel model2 = new UserTicketViewModel();
-            model2.DateTime = DateTime.Now;
-            model2.Number = 1;
-            model2.Section = "A1";
-            model2.Row = 1;
-            model2.EventName = "Event Name";
-            model2.SeatNumber = 1;
-
-            List<UserTicketViewModel> list = new List<UserTicketViewModel> { model, model2 };
+            List<UserTicketViewModel> list = new List<UserTicketViewModel> { model, model, model, model, model };
 
             return View(list);
         }

@@ -17,55 +17,67 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="~/css/main.css" rel="stylesheet">
 </head>
-<body class="focus-container-background">
-    <table>
-        @foreach (var t in Model)
-        {
-            @if (i % 2 == 0)
+<body>
+    <form asp-action="SearchTickets" method="post">
+        <div class="row">
+            <h2>Your Tickets</h2>&ensp;
+            <input type="text" class="popout-input" id="SearchString" name="SearchString" placeholder="Search tickets">
+            <button type="submit" class="general-button-orange">Search</button>
+        </div>
+    </form>
+    <div class="column-container">
+        <div class="user-ticket-grid">
+            <!-- Alternate ticket color -->
+            @foreach (var t in Model)
             {
-                ticketColor = "orange-ticket";
-            }
-            else
-            {
-                ticketColor = "purple-ticket";
-            }
-            <tr>
-                <td>
-                    <div class="ticket-wrapper @ticketColor">
-                        <div class="ticket">
-                            <div class="ticket-stub">
-                                <div class="ticket-stub-details">
-                                    <h1>@t.Section</h1>
-                                    Row: @t.Row.ToString("D" + 2)<br>
-                                    Seat: @t.SeatNumber.ToString("D" + 2)<br><br/>
-                                    Date: @t.DateTime.Date.ToString("d")
-                                </div>
-                            </div>
-                            <div class="ticket-body">
-                                <h1>@t.EventName</h1>
-                                <div class="ticket-info">
-                                    <div class="block">
-                                        <div class="property">SEC:</div>
-                                        <div class="value">@t.Section</div>
-                                    </div>
-                                    <div class="block">
-                                        <div class="property">ROW:</div>
-                                        <div class="value">@t.Row.ToString("D" + 2)</div>
-                                    </div>
-                                    <div class="block">
-                                        <div class="property">SEAT:</div>
-                                        <div class="value">@t.SeatNumber.ToString("D" + 2)</div>
-                                    </div>
-                                </div>
-                                <div class="ticket-date"><div class="purple">DATE:</div><div> @t.DateTime.Date.ToString("d")</div></div>
-                                <div class="ticket-number purple">TICKET NO: @t.Number.ToString("D" + 6)</div>
+                @if (i % 2 == 0)
+                {
+                    ticketColor = "orange-ticket";
+                }
+                else
+                {
+                    ticketColor = "purple-ticket";
+                }
+                <!-- Display ticket info from model -->
+                <div class="ticket-wrapper @ticketColor">
+                    <div class="ticket">
+                        <div class="ticket-stub">
+                            <div class="ticket-stub-details">
+                                <h1>@t.Section</h1>
+                                Row: @t.Row.ToString("D" + 2)<br>
+                                Seat: @t.SeatNumber.ToString("D" + 2)<br><br/>
+                                Date: @t.DateTime.Date.ToString("d")
                             </div>
                         </div>
+                        <div class="ticket-body">
+                            <h1>@t.EventName</h1>
+                            <div class="ticket-info">
+                                <div class="block">
+                                    <div class="property">SEC:</div>
+                                    <div class="value">@t.Section</div>
+                                </div>
+                                <div class="block">
+                                    <div class="property">ROW:</div>
+                                    <div class="value">@t.Row.ToString("D" + 2)</div>
+                                </div>
+                                <div class="block">
+                                    <div class="property">SEAT:</div>
+                                    <div class="value">@t.SeatNumber.ToString("D" + 2)</div>
+                                </div>
+                            </div>
+                            <div class="ticket-date"><div class="purple">DATE:</div><div> @t.DateTime.Date.ToString("d")</div></div>
+                            <div class="ticket-number purple">TICKET NO: @t.Number.ToString("D" + 6)</div>
+                        </div>
                     </div>
-                </td>
-            </tr>
-            i++;
-        }
-    </table>
+                </div>
+                <!-- Buttons for transfering or selling a ticket -->
+                <div class="user-ticket-button-group">
+                    <a href="/App/Profile" class="NoHyperlinkUnderline general-button-purple user-ticket-button">Transfer</a>
+                    <a href="/App/Profile" class="NoHyperlinkUnderline general-button-purple user-ticket-button">Sell</a>
+                </div>
+                i++;
+            }
+        </div>
+    </div>
 </body>
 </html>
