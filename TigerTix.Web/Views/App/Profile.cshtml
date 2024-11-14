@@ -1,6 +1,6 @@
-﻿@model RegisterViewModel
+﻿@model ProfileViewModel
 @{
-
+    Layout = "~/Views/Shared/BannerLayout.cshtml";
     ViewData["Title"] = "Profile";
 }
 
@@ -15,35 +15,16 @@
     <link href="~/css/main.css" rel="stylesheet">
 </head>
 <body class="focus-container-background">
-    <!-- Start of Banner -->
-    <div id="TopBanner">
-        <div id="TopBannerLeft">
-            <div class="tt-logo">
-                <a href="/App/Index" , class="NoHyperlinkUnderline">
-                    <span class="tt-logo-tiger">Tiger</span><span class="tt-logo-tix">Tix</span>
-                </a>
-            </div>
-        </div>
-        <div id="TopBannerRight">
-            <a href="/App/Login" class="NoHyperlinkUnderline TopRightLink">Login</a>
-            <a href="/App/Register" class="NoHyperlinkUnderline TopRightLink">Register</a>
-            <a href="/App/Profile" class="NoHyperlinkUnderline TopRightLink">My Account</a>
-        </div>
-    </div>
-    <!-- End of Banner -->
-
     <div class="focus-container ProfileContainer">
         <h1> Profile </h1>
         <h2> CUID </h2>
-        <p id="cuid"> C123456789 </p>
+        <p id="cuid"> @Model.UserName </p>
         <h2> First Name </h2>
-        <p id="firstname"> John </p>
+        <p id="firstname"> @Model.FirstName </p>
         <h2> Last Name </h2>
-        <p id="lastname"> Smith </p>
+        <p id="lastname"> @Model.LastName </p>
         <h2> Email </h2>
-        <p id="email"> emailplaceholder.email.com </p>
-        <h2> Password </h2>
-        <p id="password"> ******** </p>
+        <p id="email"> @Model.Email </p>
         <a href="/App/EditProfile" class="">Edit Profile</a>
     </div>
 </body>

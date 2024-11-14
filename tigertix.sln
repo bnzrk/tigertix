@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TigerTix.Web", "TigerTix.Web\TigerTix.Web.csproj", "{4A688AFC-0121-450C-8B6A-D2A8567A0A9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit TigerTix", "xUnit TigerTix\xUnit TigerTix.csproj", "{9E7D4AE3-C819-4468-BD8F-02FD7016DA5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnit TigerTix", "xUnit TigerTix\xUnit TigerTix.csproj", "{9E7D4AE3-C819-4468-BD8F-02FD7016DA5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

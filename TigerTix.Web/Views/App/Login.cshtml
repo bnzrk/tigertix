@@ -1,6 +1,6 @@
 ﻿@model LoginViewModel
 @{
-
+    Layout = "~/Views/Shared/BannerLayout.cshtml";
     ViewData["Title"] = "Login";
 }
 
@@ -15,22 +15,6 @@
     <link href="~/css/main.css" rel="stylesheet">
 </head>
 <body class="focus-container-background">
-    <!-- Start of Banner -->
-    <div id="TopBanner">
-        <div id="TopBannerLeft">
-            <div class="tt-logo">
-                <a href="/App/Index" , class="NoHyperlinkUnderline">
-                    <span class="tt-logo-tiger">Tiger</span><span class="tt-logo-tix">Tix</span>
-                </a>
-            </div>
-        </div>
-        <div id="TopBannerRight">
-            <a href="/App/Login" class="NoHyperlinkUnderline TopRightLink">Login</a>
-            <a href="/App/Register" class="NoHyperlinkUnderline TopRightLink">Register</a>
-            <a href="/App/Profile" class="NoHyperlinkUnderline TopRightLink">My Account</a>
-        </div>
-    </div>
-    <!-- End of Banner -->
     <div class="focus-container">
         <div class="tt-logo">
             <span class="tt-logo-tiger">Tiger</span><span class="tt-logo-tix">Tix</span>
