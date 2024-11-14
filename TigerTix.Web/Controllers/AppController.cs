@@ -217,14 +217,6 @@ namespace TigerTix.Web.Controllers
             }
             return View();
         }
-
-        // TODO: Rework to avoid call to database
-        protected async Task<ApplicationUser> GetCurrentUserAsync()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = await _userManager.FindByIdAsync(userId);
-            return user;
-        }
         public async Task<IActionResult> Profile()
         {
             if (!UserIsLoggedIn())
@@ -242,6 +234,37 @@ namespace TigerTix.Web.Controllers
             model.Email = user.Email;
 
             return View(model);
+        }
+
+        public IActionResult UserTickets()
+        {
+            UserTicketViewModel model = new UserTicketViewModel();
+            model.DateTime = DateTime.Now;
+            model.Number = 1;
+            model.Section = "A1";
+            model.Row = 1;
+            model.EventName = "Event Name";
+            model.SeatNumber = 1;
+
+            UserTicketViewModel model2 = new UserTicketViewModel();
+            model2.DateTime = DateTime.Now;
+            model2.Number = 1;
+            model2.Section = "A1";
+            model2.Row = 1;
+            model2.EventName = "Event Name";
+            model2.SeatNumber = 1;
+
+            List<UserTicketViewModel> list = new List<UserTicketViewModel> { model, model2 };
+
+            return View(list);
+        }
+
+        // TODO: Rework to avoid call to database
+        protected async Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+            return user;
         }
 
         public bool UserIsLoggedIn()
