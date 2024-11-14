@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<UserTicketViewModel>
 @{
-    Layout = "~/Views/Shared/BannerLayout.cshtml";
+    Layout = "~/Views/Shared/_BannerLayout.cshtml";
     ViewData["Title"] = "Profile";
 
     int i = 0;
@@ -18,13 +18,15 @@
     <link href="~/css/main.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Currently does nothing -->
     <form asp-action="SearchTickets" method="post">
         <div class="row">
-            <h2>Your Tickets</h2>&ensp;
+            <h2>My Tickets</h2>&ensp;
             <input type="text" class="popout-input" id="SearchString" name="SearchString" placeholder="Search tickets">
             <button type="submit" class="general-button-orange">Search</button>
         </div>
     </form>
+    <!-- Ticket column -->
     <div class="column-container">
         <div class="user-ticket-grid">
             <!-- Alternate ticket color -->

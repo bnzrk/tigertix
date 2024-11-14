@@ -28,17 +28,8 @@ namespace TigerTix.Web.Controllers
             _signInManager = signInManager;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var user = await GetCurrentUserAsync();
-
-            if (user != null)
-            {
-                Console.WriteLine("Logged in as: " + user.FirstName + " " + user.LastName);
-            }
-            else
-                Console.WriteLine("Not logged in.");
-
             return View();
         }
 
