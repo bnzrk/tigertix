@@ -238,6 +238,7 @@ label
 #TopBanner
 {
     position: fixed;
+    z-index: 999;
     display: flex;
     align-items: center;
     top: 0px;
@@ -290,6 +291,7 @@ label
 
 .general-button-purple
 {
+    min-width: 50px;
     text-align: center;
     width: auto;
     height: auto;
@@ -308,6 +310,7 @@ label
 }
 .general-button-orange
 {
+    min-width: 50px;
     text-align: center;
     width: auto;
     height: auto;
@@ -327,7 +330,9 @@ label
 
 .banner-spacer
 {
+    margin: 0;
     height: 100px;
+    width: 100%;
 }
 
 
@@ -356,6 +361,7 @@ label
     display: flex;
     flex-direction: row;
     align-items: center;
+    vertical-align: baseline;
     justify-content: center;
 }
 
@@ -368,4 +374,242 @@ label
     text-align: left;
     margin-bottom: 0px;
     margin-left: 4px;
+}
+
+/* TICKET CSS */
+
+.ticket-wrapper
+{
+    margin: 20px;
+    filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.3));
+    width: 400px;
+    height: 170px;
+}
+
+.ticket
+{
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    font-family: monospace;
+    transition: transform 0.12s;
+    display: flex;
+    flex-direction: row;
+}
+
+.ticket:hover
+{
+    transform: scale(1.02) rotate(-1.2deg);
+}
+
+.ticket:active
+{
+    transform: scale(1.0) rotate(-1.2deg);
+}
+
+.ticket h1
+{
+    font-size: 26px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.ticket-body h1
+{
+    padding-right: 10%;
+}
+
+.ticket-stub h1
+{
+    color: white;
+}
+
+.ticket-details
+{
+    margin-right: 10%;
+    padding: 18px 24px;
+    font-weight: bold;
+}
+
+.ticket-stub-details
+{
+    font-size: 14px;
+    color: white;
+    text-align: center;
+}
+
+.ticket-stub
+{
+    width: 25%;
+    border-radius: 8px 4px 4px 8px;
+}
+
+.ticket-body
+{
+    width: 75%;
+    border-radius: 4px 8px 8px 4px;
+    mask-image: radial-gradient(circle at 100% 50%, transparent 12px, black 13px);
+}
+
+.ticket-info
+{
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-right: 20%;
+    margin-left: 10%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-align: center;
+}
+
+.ticket-info .block
+{
+    display: inline-block;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.ticket-info .property
+{
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.ticket-info .value
+{
+    font-weight: bold;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.ticket-date
+{
+    font-family: monospace;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    margin-right: 10%;
+    font-weight: bold;
+    font-size: 14px;
+    padding-top: 1px;
+    padding-bottom: 2px;
+}
+
+.purple
+{
+    font-size: 12px;
+}
+
+.ticket-number
+{
+    font-size: 10px;
+    text-align: right;
+    font-weight: bold;
+    margin-right: 12%;
+    padding-top: 10px;
+    padding-left: 6px;
+}
+
+/* Orange */
+
+.orange-ticket .ticket-stub
+{
+    background: #f56600;
+}
+
+.orange-ticket .ticket-body
+{
+    background: linear-gradient(to right, white 90%, #f56600 10%);
+}
+
+.orange-ticket .ticket-number, .orange-ticket .purple, .orange-ticket .property
+{
+    color: #f56600;
+}
+
+.orange-ticket .ticket-info
+{
+    background: #ffe5df;
+}
+
+/* Purple */
+
+.purple-ticket .ticket-stub
+{
+    background: #693f9e;
+}
+
+.purple-ticket .ticket-body
+{
+    background: linear-gradient(to right, white 90%, #693f9e 10%);
+}
+
+.purple-ticket .ticket-number, .purple-ticket .purple, .purple-ticket .property
+{
+    color: #693f9e;
+}
+
+.purple-ticket .ticket-info
+{
+    background: #ead9ff;
+}
+
+.user-ticket-grid
+{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    padding: 10px;
+}
+
+.user-ticket-button-group
+{
+    margin: auto;
+    /*filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.3));*/
+    display: grid;
+    place-items: center;
+    grid-row-gap: 4px;
+}
+
+.user-ticket-button
+{
+    width: 60px;
+    margin: auto;
+}
+
+.scroll-region-header
+{
+    background: red;
+    position: sticky;
+    width: 100%;
+    scroll-margin-top: 5rem;
+    top: 0;
+    z-index: 800;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input[type="text"].popout-input
+{
+    width: auto;
+    margin: 0px 4px 0px 4px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

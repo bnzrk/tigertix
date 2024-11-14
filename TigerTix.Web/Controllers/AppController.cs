@@ -28,17 +28,8 @@ namespace TigerTix.Web.Controllers
             _signInManager = signInManager;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var user = await GetCurrentUserAsync();
-
-            if (user != null)
-            {
-                Console.WriteLine("Logged in as: " + user.FirstName + " " + user.LastName);
-            }
-            else
-                Console.WriteLine("Not logged in.");
-
             return View();
         }
 
@@ -217,14 +208,6 @@ namespace TigerTix.Web.Controllers
             }
             return View();
         }
-
-        // TODO: Rework to avoid call to database
-        protected async Task<ApplicationUser> GetCurrentUserAsync()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = await _userManager.FindByIdAsync(userId);
-            return user;
-        }
         public async Task<IActionResult> Profile()
         {
             if (!UserIsLoggedIn())
@@ -242,6 +225,29 @@ namespace TigerTix.Web.Controllers
             model.Email = user.Email;
 
             return View(model);
+        }
+
+        public IActionResult UserTickets()
+        {
+            UserTicketViewModel model = new UserTicketViewModel();
+            model.DateTime = DateTime.Now;
+            model.Number = 1;
+            model.Section = "A1";
+            model.Row = 1;
+            model.EventName = "Event Name";
+            model.SeatNumber = 1;
+
+            List<UserTicketViewModel> list = new List<UserTicketViewModel> { model, model, model, model, model };
+
+            return View(list);
+        }
+
+        // TODO: Rework to avoid call to database
+        protected async Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+            return user;
         }
 
         public bool UserIsLoggedIn()
