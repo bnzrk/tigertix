@@ -8,7 +8,7 @@
         <header id="TopBanner">
             <div id="TopBannerLeft">
                 <div class="tt-logo">
-                    <a href="/App/Index" , class="NoHyperlinkUnderline">
+                    <a href="/home" , class="NoHyperlinkUnderline">
                         <span class="tt-logo-tiger">Tiger</span><span class="tt-logo-tix">Tix</span>
                     </a>
                 </div>
@@ -16,21 +16,20 @@
             <div id="TopBannerRight">
                 @if (isAuthenticated != true)
                 {
-                    <a href="/App/Login" class="NoHyperlinkUnderline general-button-purple">Login</a>
-                    <a href="/App/Register" class="NoHyperlinkUnderline general-button-orange">Register</a>
+                    <a href="/user/login" class="NoHyperlinkUnderline general-button-purple">Login</a>
+                    <a href="/user/register" class="NoHyperlinkUnderline general-button-orange">Register</a>
                 }
                 else
                 {
                     if (currentPage == "profile")
                     {
-                        <form asp-controller="" asp-action="Logout" method="post" class="form-no-margin">
-                            <button type="submit" class="general-button-purple">Logout</button>
-                        </form>
+                        <a href="/user/logout" class="NoHyperlinkUnderline general-button-purple">Logout</a>
                     }
                     else
                     {
-                        <a href="/App/Profile" class="NoHyperlinkUnderline general-button-purple">My Account</a>
+                        <a href="/user/profile" class="NoHyperlinkUnderline general-button-purple">My Account</a>
                     }
+                    <a href="/user/tickets" class="NoHyperlinkUnderline general-button-orange">My Tickets</a>
                 }
             </div>
         </header>

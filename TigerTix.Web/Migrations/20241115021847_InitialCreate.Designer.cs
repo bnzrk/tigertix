@@ -12,8 +12,8 @@ using TigerTix.Web.Data;
 namespace TigerTix.Web.Migrations
 {
     [DbContext(typeof(TigerTixContext))]
-    [Migration("20241104033019_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20241115021847_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,7 +1,7 @@
 ﻿@model EventViewModel
 @{
 
-    ViewData["Title"] = "Event Creation";
+    ViewData["Title"] = "Create Event";
 }
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 <body>
     <h1>Event Info</h1>
 
-    <form asp-action="CreateEvent" method="post">
+    <form asp-action="Create" method="post">
         <div>
             <label asp-for="EventName"></label>
             <br />
@@ -30,9 +30,5 @@
         <br />
         <input type="submit" value="Create" />
     </form>
-
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
 </body>
 </html>

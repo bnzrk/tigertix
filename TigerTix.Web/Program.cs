@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TigerTix.Web.Data;
@@ -47,21 +48,23 @@ var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler("/error");
     app.UseHsts();
 }
 
-app.MapGet("/", () => Results.Redirect("/app"));
+app.MapGet("/", () => Results.Redirect("/home"));
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseRouting(); 
+app.UseRouting();
 app.UseSession();
 app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=App}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.UseDefaultFiles();
 

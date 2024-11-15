@@ -1,6 +1,5 @@
-@model IEnumerable<Ticket>
+﻿@model IEnumerable<Ticket>
 
-<script src="/_framework/aspnetcore-browser-refresh.js"></script>
 <h1> Tickets </h1>
 <table>
     <tr>
@@ -12,7 +11,7 @@
     {
         <tr>
             <td>@t.CUID&emsp;</td>
-            <td>@t.TicketEvent&emsp;</td>
+            <td>@t.TicketEvent.EventName&emsp;</td>
             <td>@t.SeatNumber&emsp;</td>
         </tr>
     }

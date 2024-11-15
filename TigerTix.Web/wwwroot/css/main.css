@@ -246,7 +246,7 @@ label
     height: 100px;
     background-color: white;
     /*border-top: solid 2px orange;*/
-    /*border-bottom: solid 2px orange;*/
+    /*border-bottom: solid 6px #f56600;*/
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     /*    margin-bottom: 20px;*/
 }

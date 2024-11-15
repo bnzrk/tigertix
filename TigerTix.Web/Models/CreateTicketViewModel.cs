@@ -3,13 +3,10 @@ using TigerTix.Web.Data.Entities;
 
 namespace TigerTix.Web.Models
 {
-    public class TicketViewModel
+    public class CreateTicketViewModel
     {
         [Required]
-        public int CUID { get; set; }
-        [Required]
-        public int SeatNumber { get; set; }
-        [Required]
         public int EventId { get; set; }
+        public Ticket Ticket { get; set; } = new Ticket();
     }
 }
