@@ -1,5 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace TigerTix.Web.Data.Entities
 {
+    // FIXME: Returned events need to explicity include the ticket list because it is in another table or the returned event's ticket list will be empty
     public class EventRepository : IEventRepository
     {
         private readonly TigerTixContext _context;
@@ -24,7 +27,11 @@ namespace TigerTix.Web.Data.Entities
         public Event GetEventByID(int eventID)
         {
             // Get first matching event entry or default if not found
-            var tigerTixEvent = (from e in _context.Events where e.Id == eventID select e).FirstOrDefault();
+            var tigerTixEvent = (from e in _context.Events
+                                 where e.Id == eventID
+                                 select e)
+                                .Include(e => e.TicketList) // Include the ticket list
+                                .FirstOrDefault();
             return tigerTixEvent;
         }
 

@@ -1,4 +1,4 @@
-@model TicketViewModel
+@model CreateTicketViewModel
 @{
 
     ViewData["Title"] = "Ticket Creation";
@@ -15,17 +15,17 @@
 
     <form asp-action="CreateTicket" method="post">
         <div><
-            <label asp-for="CUID"></label>
+            <label asp-for="Ticket.CUID"></label>
             <br />
-            <input asp-for="CUID" class="number" />
-            <span asp-validation-for="CUID" class="text-danger"></span>
+            <input asp-for="Ticket.CUID" class="number" />
+            <span asp-validation-for="Ticket.CUID" class="text-danger"></span>
         <div>
         <br />
         <div>
-            <label asp-for="SeatNumber"></label>
+            <label asp-for="Ticket.SeatNumber"></label>
             <br />
-            <input asp-for="SeatNumber" class="form-control" type="number" />
-            <span asp-validation-for="SeatNumber" class="text-danger"></span>
+            <input asp-for="Ticket.SeatNumber" class="form-control" type="number" />
+            <span asp-validation-for="Ticket.SeatNumber" class="text-danger"></span>
         </div>
         <br />
         </div>
@@ -34,6 +34,7 @@
             <input asp-for="EventId" class="form-control" type="number" />
             <span asp-validation-for="EventId" class="text-danger"></span>
         </div>
+        <input type="hidden" asp-for="EventId" />
         <br />
         <input type="submit" value="Create" />
     </form>

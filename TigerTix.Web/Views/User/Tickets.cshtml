@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<UserTicketViewModel>
 @{
     Layout = "~/Views/Shared/_BannerLayout.cshtml";
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "My Tickets";
 
     int i = 0;
     string ticketColor;
@@ -47,7 +47,7 @@
                             <div class="ticket-stub-details">
                                 <h1>@t.Section</h1>
                                 Row: @t.Row.ToString("D" + 2)<br>
-                                Seat: @t.SeatNumber.ToString("D" + 2)<br><br/>
+                                Seat: @t.SeatNumber.ToString("D" + 2)<br><br />
                                 Date: @t.DateTime.Date.ToString("d")
                             </div>
                         </div>
