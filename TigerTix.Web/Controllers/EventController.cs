@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TigerTix.Web.Data.Entities;
 using TigerTix.Web.Models;
-using System.Text.RegularExpressions;
-using Microsoft.EntityFrameworkCore;
 
 namespace TigerTix.Web.Controllers
 {
@@ -24,7 +22,7 @@ namespace TigerTix.Web.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("event/{eventId}")]
+        [HttpGet("/event/{eventId}")]
         public IActionResult Index(int eventId)
         {
             Event eventListing = _eventRepository.GetEventByID(eventId);
@@ -35,8 +33,11 @@ namespace TigerTix.Web.Controllers
 
             var eventViewModel = new EventViewModel
             {
-                EventName = eventListing.Name,
-                EventDate = eventListing.Date
+                Id = eventListing.Id,
+                Name = eventListing.Name,
+                Description = eventListing.Description,
+                Date = eventListing.Date,
+                BasePrice = eventListing.BasePrice
             };
 
             List<Ticket> tickets = _eventRepository.GetEventUnownedTickets(eventId);
@@ -51,7 +52,6 @@ namespace TigerTix.Web.Controllers
 
             var model = new EventDetailsViewModel
             {
-                EventId = eventId,
                 Event = eventViewModel,
                 Tickets = ticketsViewModel
             };
@@ -59,6 +59,7 @@ namespace TigerTix.Web.Controllers
             return View(model);
         }
 
+        [HttpGet("/event/browse")]
         public IActionResult Browse()
         {
             var results = from e in _eventRepository.GetAllEvents()
@@ -67,20 +68,25 @@ namespace TigerTix.Web.Controllers
             return View(results.ToList());
         }
 
+        [HttpGet("/event/create")]
         public IActionResult Create()
         {
+            Console.WriteLine("Creat page.");
             return View();
         }
 
-        [HttpPost("event/create")]
+        [HttpPost("/event/create")]
         public IActionResult Create(EventViewModel eventModel)
         {
+            Console.WriteLine("Creat page POST.");
             if (ModelState.IsValid)
             {
                 var eventEntity = new Event
                 {
-                    Name = eventModel.EventName,
-                    Date = eventModel.EventDate
+                    Name = eventModel.Name,
+                    Description = eventModel.Description,
+                    Date = eventModel.Date,
+                    BasePrice= eventModel.BasePrice
                 };
 
                 for (int i = 1; i <= 10; i++)
@@ -90,7 +96,7 @@ namespace TigerTix.Web.Controllers
                         Section = "A1",
                         Row = 1,
                         SeatNumber = i,
-                        Price = 125.00M, // TODO: Update event creation to have base price field
+                        Price = eventEntity.BasePrice,
                         Event = eventEntity,
                         EventId = eventEntity.Id
                     };
@@ -158,13 +164,13 @@ namespace TigerTix.Web.Controllers
             return RedirectToAction("Tickets", "Event", new { eventId = model.EventId });
         }
 
-        // TEMP TEST FUNCTION
-        [HttpPost("event/claimticket")]
-        public async Task<IActionResult> ClaimTicket(int ticketId)
+        // TEMP TEST
+        [HttpPost("/event/claimticket")]
+        public async Task<IActionResult> ClaimTicket([FromQuery] int eventId, [FromQuery] int ticketId)
         {
             if (!UserIsLoggedIn())
             {
-                return BadRequest();
+                return RedirectToAction("Login", "User");
             }
 
             ApplicationUser currentUser = await GetCurrentUserAsync();
@@ -185,8 +191,18 @@ namespace TigerTix.Web.Controllers
 
             await _userManager.UpdateAsync(currentUser);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Event", new { eventId } );
         }
+
+        // TEMP TEST
+        [HttpPost("/event/claimanyticket")]
+        public async Task<IActionResult> ClaimAnyTicket([FromQuery] int eventId)
+        {
+            // Do nothing for now
+
+            return RedirectToAction("Index", "Event", new { eventId });
+        }
+
         protected async Task<ApplicationUser> GetCurrentUserAsync()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

@@ -5,9 +5,15 @@ namespace TigerTix.Web.Models
     public class EventViewModel
     {
         [Required]
-        public string EventName { get; set; }
+        public int Id { get; set; }
+        [Required]
+        public string Name { get; set; } = string.Empty;
+        [Required]
+        public string Description { get; set; } = string.Empty;
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime EventDate { get; set; }
+        public DateTime Date { get; set; }
+        [Required]
+        public decimal BasePrice { get; set; }
     }
 }
