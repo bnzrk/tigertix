@@ -13,12 +13,13 @@
 <body>
     <h1>Event Info</h1>
 
+    <!-- FIXME: Need to update to map to new ticket model -->
     <form asp-action="CreateTicket" method="post" asp-route-eventId="@Model.EventId">
         <div>
-            <label asp-for="Ticket.CUID"></label>
+            <label asp-for="Ticket.Section"></label>
             <br />
-            <input asp-for="Ticket.CUID" class="number" />
-            <span asp-validation-for="Ticket.CUID" class="text-danger"></span>
+            <input asp-for="Ticket.Section" class="number" />
+            <span asp-validation-for="Ticket.Section" class="text-danger"></span>
             <div>
                 <br />
                 <div>

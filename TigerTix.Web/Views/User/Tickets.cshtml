@@ -48,7 +48,7 @@
                                 <h1>@t.Section</h1>
                                 Row: @t.Row.ToString("D" + 2)<br>
                                 Seat: @t.SeatNumber.ToString("D" + 2)<br><br />
-                                Date: @t.DateTime.Date.ToString("d")
+                                Date: @t.EventDate.Date.ToString("d")
                             </div>
                         </div>
                         <div class="ticket-body">
@@ -67,8 +67,8 @@
                                     <div class="value">@t.SeatNumber.ToString("D" + 2)</div>
                                 </div>
                             </div>
-                            <div class="ticket-date"><div class="purple">DATE:</div><div> @t.DateTime.Date.ToString("d")</div></div>
-                            <div class="ticket-number purple">TICKET NO: @t.Number.ToString("D" + 6)</div>
+                            <div class="ticket-date"><div class="purple">DATE:</div><div> @t.EventDate.Date.ToString("d")</div></div>
+                            <div class="ticket-number purple">TICKET NO: @t.Id.ToString("D" + 6)</div>
                         </div>
                     </div>
                 </div>

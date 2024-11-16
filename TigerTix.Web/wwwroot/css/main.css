@@ -340,7 +340,7 @@ label
 {
     margin: 20px;
     max-width: 750px;
-    background: linear-gradient(to bottom, #693f9e 0% 20%, white 20% 100%);
+    background: white;
 }
 .ProfileContainer h2
 {
@@ -349,7 +349,6 @@ label
 }
 .ProfileContainer h1
 {
-    color: white;
     box-sizing: border-box;
     width: 100%;
     margin: 0px;

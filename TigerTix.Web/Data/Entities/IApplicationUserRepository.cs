@@ -17,9 +17,12 @@ namespace TigerTix.Web.Data.Entities
         IEnumerable<ApplicationUser> GetAllUsers();
 
         // Returns a specific user by id.
-        Task<ApplicationUser> GetUserByIdAsync(string userID);
+        Task<ApplicationUser> GetUserByIdAsync(string userId);
 
         // Returns a specific user by username.
         Task<ApplicationUser> GetUserByUsernameAsync(string username);
+
+        // Returns all tickets owned by a specific user by id.
+        Task<List<Ticket>> GetUserTickets(string userId);
     }
 }

@@ -34,33 +34,26 @@ namespace TigerTix.Web.Controllers
             _signInManager = signInManager;
         }            
 
-        public IActionResult ShowUsers()
+        public IActionResult Users()
         {
             var results = from u in _userRepository.GetAllUsers()
                           select u;
 
             return View(results.ToList());
         }
+        public IActionResult Events()
+        {
+            var results = from e in _eventRepository.GetAllEvents()
+                          select e;
 
-        //public IActionResult CreateTicket()
-        //{
-        //    return View();
-        //}
+            return View(results.ToList());
+        }
+        public IActionResult Tickets()
+        {
+            var results = from t in _ticketRepository.GetAllTickets()
+                          select t;
 
-        //[HttpPost("App/CreateTicket")]
-        //public IActionResult CreateTicket(CreateTicketViewModel ticketModel) 
-        //{
-        //    //if (ModelState.IsValid) {
-        //    //    var ticketEntity = new Ticket {
-        //    //        CUID = ticketModel.CUID,
-        //    //        SeatNumber = ticketModel.SeatNumber,
-        //    //        EventId = ticketModel.EventId
-        //    //    };
-
-        //    //    _ticketRepository.SaveTicket(ticketEntity);
-        //    //    _ticketRepository.SaveAll();
-        //    //}
-        //    return View();
-        //}
+            return View(results.ToList());
+        }
     }
 }
