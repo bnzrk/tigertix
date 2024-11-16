@@ -1,14 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace TigerTix.Web.Data.Entities
 {
     public class ApplicationUserRepository : IApplicationUserRepository
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly TigerTixContext _context;
 
-        public ApplicationUserRepository(UserManager<ApplicationUser> userManager)
+        public ApplicationUserRepository(UserManager<ApplicationUser> userManager, TigerTixContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         public async Task<IdentityResult> SaveUserAsync(ApplicationUser user, string password)
@@ -39,6 +42,15 @@ namespace TigerTix.Web.Data.Entities
         public async Task<IdentityResult> DeleteUserAsync(ApplicationUser user)
         {
             return await _userManager.DeleteAsync(user);
+        }
+
+        public async Task<List<Ticket>> GetUserTickets(string userId)
+        {
+            return await _context.Users
+            .Where(u => u.Id == userId)
+            .SelectMany(u => u.Tickets)
+            .Include(t => t.Event) // Include Event navigation property so this can be accessed
+            .ToListAsync();
         }
     }
 }

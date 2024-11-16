@@ -24,14 +24,9 @@ namespace TigerTix.Web.Data.Entities
             return events.ToList();
         }
 
-        public Event GetEventByID(int eventID)
+        public Event GetEventByID(int eventId)
         {
-            // Get first matching event entry or default if not found
-            var tigerTixEvent = (from e in _context.Events
-                                 where e.Id == eventID
-                                 select e)
-                                .Include(e => e.TicketList) // Include the ticket list
-                                .FirstOrDefault();
+            var tigerTixEvent = (from e in _context.Events where e.Id == eventId select e).FirstOrDefault();
             return tigerTixEvent;
         }
 
@@ -50,6 +45,22 @@ namespace TigerTix.Web.Data.Entities
         public bool SaveAll()
         {
             return _context.SaveChanges() > 0;
+        }
+
+        public List<Ticket> GetEventTickets(int eventId)
+        {
+            return _context.Events
+            .Where(e => e.Id == eventId)
+            .SelectMany(e => e.Tickets)
+            .ToList();
+        }
+        public List<Ticket> GetEventUnownedTickets(int eventId)
+        {
+            return _context.Events
+            .Where(e => e.Id == eventId)
+            .SelectMany(e => e.Tickets)
+            .Where(t => t.UserOwner == null)
+            .ToList();
         }
     }
 }

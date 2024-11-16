@@ -41,26 +41,5 @@ namespace TigerTix.Web.Controllers
 
             return View(results.ToList());
         }
-
-        //public IActionResult CreateTicket()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost("App/CreateTicket")]
-        //public IActionResult CreateTicket(CreateTicketViewModel ticketModel) 
-        //{
-        //    //if (ModelState.IsValid) {
-        //    //    var ticketEntity = new Ticket {
-        //    //        CUID = ticketModel.CUID,
-        //    //        SeatNumber = ticketModel.SeatNumber,
-        //    //        EventId = ticketModel.EventId
-        //    //    };
-
-        //    //    _ticketRepository.SaveTicket(ticketEntity);
-        //    //    _ticketRepository.SaveAll();
-        //    //}
-        //    return View();
-        //}
     }
 }

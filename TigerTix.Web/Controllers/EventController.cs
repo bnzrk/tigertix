@@ -14,11 +14,14 @@ namespace TigerTix.Web.Controllers
 
         private readonly ITicketRepository _ticketRepository;
 
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public EventController(IEventRepository eventRepository, ITicketRepository ticketRepository)
+
+        public EventController(UserManager<ApplicationUser> userManager, IEventRepository eventRepository, ITicketRepository ticketRepository)
         {
             _eventRepository = eventRepository;
             _ticketRepository = ticketRepository;
+            _userManager = userManager;
         }
 
         public IActionResult Browse()
@@ -41,38 +44,42 @@ namespace TigerTix.Web.Controllers
             {
                 var eventEntity = new Event
                 {
-                    EventName = eventModel.EventName,
-                    EventDate = eventModel.EventDate
+                    Name = eventModel.EventName,
+                    Date = eventModel.EventDate
                 };
 
                 for (int i = 1; i <= 10; i++)
                 {
                     var ticket = new Ticket
                     {
+                        Section = "A1",
+                        Row = 1,
                         SeatNumber = i,
-                        TicketEvent = eventEntity,
+                        Price = 125.00M, // TODO: Update event creation to have base price field
+                        Event = eventEntity,
                         EventId = eventEntity.Id
                     };
 
-                    eventEntity.TicketList.Add(ticket);
+                    eventEntity.Tickets.Add(ticket);
                 }
 
                 _eventRepository.SaveEvent(eventEntity);
                 _eventRepository.SaveAll();
             }
-            return View();
+            return RedirectToAction("Browse", "Event");
         }
 
         [HttpGet("event/{eventId}/tickets")]
         public IActionResult Tickets(int eventId)
-        {
-            Event eventListing = _eventRepository.GetEventByID(eventId);
-            if (eventListing == null || eventListing.TicketList == null)
+        { 
+            List<Ticket> tickets = _eventRepository.GetEventTickets(eventId);
+            Console.WriteLine($"Number of tickets grabbed: {tickets.Count}");
+            if (tickets.Count == 0 || tickets == null)
             {
                 return NotFound();
             }
 
-            return View(eventListing.TicketList);
+            return View(tickets);
         }
 
         [HttpGet("/event/{eventId}/createticket")]
@@ -105,14 +112,57 @@ namespace TigerTix.Web.Controllers
 
             Ticket ticket = new Ticket();
             ticket.EventId = eventId;
-            ticket.TicketEvent = eventListing;
+            ticket.Event = eventListing;
             ticket.SeatNumber = model.Ticket.SeatNumber;
-            ticket.CUID = model.Ticket.CUID;
+            ticket.Row = model.Ticket.Row;
+            ticket.Section = model.Ticket.Section;
+            ticket.Price = model.Ticket.Price;
 
-            eventListing.TicketList.Add(ticket);
+            eventListing.Tickets.Add(ticket);
             _eventRepository.UpdateEvent(eventListing);
             _eventRepository.SaveAll();
             return RedirectToAction("Tickets", "Event", new { eventId = model.EventId });
+        }
+
+        // TEMP TEST FUNCTION
+        [HttpPost("event/claimticket")]
+        public async Task<IActionResult> ClaimTicket(int ticketId)
+        {
+            if (!UserIsLoggedIn())
+            {
+                return BadRequest();
+            }
+
+            ApplicationUser currentUser = await GetCurrentUserAsync();
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+
+            Ticket claimedTicket = _ticketRepository.GetTicketByID(ticketId);
+            if (claimedTicket == null)
+            {
+                return NotFound();
+            }
+
+            currentUser.Tickets.Add(claimedTicket);
+            _ticketRepository.UpdateTicket(claimedTicket);
+            _ticketRepository.SaveAll();
+
+            await _userManager.UpdateAsync(currentUser);
+
+            return RedirectToAction("Index", "Home");
+        }
+        protected async Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+            return user;
+        }
+
+        protected bool UserIsLoggedIn()
+        {
+            return User.Identity?.IsAuthenticated == true;
         }
     }
 }

@@ -21,14 +21,14 @@ namespace TigerTix.Web.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(_config["ConnectionStrings:DefaultConnection"]);
+            optionsBuilder.UseSqlServer(_config["ConnectionStrings:LocalConnection"]);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Event>()
-                .HasMany(e => e.TicketList)
-                .WithOne(t => t.TicketEvent)
+                .HasMany(e => e.Tickets)
+                .WithOne(t => t.Event)
                 .HasForeignKey(t => t.EventId)
                 .OnDelete(DeleteBehavior.Cascade);
 

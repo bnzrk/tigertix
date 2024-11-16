@@ -15,9 +15,15 @@ namespace TigerTix.Web.Data.Entities
         IEnumerable<Event> GetAllEvents();
 
         // Queries and returns a specific user from the database's User table by ID.
-        Event GetEventByID(int eventID);
+        Event GetEventByID(int eventId);
 
         // Saves all changes to the database and returns whether any entries were affected.
         bool SaveAll();
+
+        // Returns all tickets for a specific event by id.
+        List<Ticket> GetEventTickets(int eventId);
+
+        // Returns all tickets without an owner for a specifc event by id.
+        List<Ticket> GetEventUnownedTickets(int eventId);
     }
 }

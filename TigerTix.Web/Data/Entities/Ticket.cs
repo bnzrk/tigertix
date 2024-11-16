@@ -3,12 +3,13 @@ namespace TigerTix.Web.Data.Entities
     public class Ticket
     {
         public int Id { get; set; }
-        public int CUID { get; set; } = 0;
-        //public string TicketEvent { get; set; } = string.Empty;
+        public string Section { get; set; }
+        public int Row { get; set; }
         public int SeatNumber { get; set; }
-        // Foreign key
+        public decimal Price { get; set; }
         public int EventId { get; set; }
-        public Event TicketEvent { get; set; }
-
+        public Event Event { get; set; }
+        public string? UserOwnerId { get; set; }
+        public ApplicationUser UserOwner { get; set; }
     }
 }

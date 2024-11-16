@@ -48,19 +48,26 @@ namespace TigerTix.Web.Controllers
             return View(model);
         }
 
-        public IActionResult Tickets()
+        public async Task<IActionResult> Tickets()
         {
-            UserTicketViewModel model = new UserTicketViewModel();
-            model.DateTime = DateTime.Now;
-            model.Number = 1;
-            model.Section = "A1";
-            model.Row = 1;
-            model.EventName = "Event Name";
-            model.SeatNumber = 1;
+            if (!UserIsLoggedIn())
+                return NotFound();
 
-            List<UserTicketViewModel> list = new List<UserTicketViewModel> { model, model, model, model, model };
+            ApplicationUser currentUser = await GetCurrentUserAsync();
+            List<Ticket> tickets = await _userRepository.GetUserTickets(currentUser.Id);
 
-            return View(list);
+            // Build a list of view models from the ticket list
+            var models =  tickets.Select(ticket => new UserTicketViewModel
+            {
+                Id = ticket.Id,
+                EventName = ticket.Event.Name,
+                EventDate = ticket.Event.Date,
+                Section = ticket.Section,
+                Row = ticket.Row,
+                SeatNumber = ticket.SeatNumber
+            }).ToList();
+
+            return View(models);
         }
 
         /************************

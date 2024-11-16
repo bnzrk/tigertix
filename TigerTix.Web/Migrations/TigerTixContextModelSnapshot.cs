@@ -236,10 +236,10 @@ namespace TigerTix.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EventDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EventName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -256,18 +256,30 @@ namespace TigerTix.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CUID")
+                    b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EventId")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Row")
                         .HasColumnType("int");
 
                     b.Property<int>("SeatNumber")
                         .HasColumnType("int");
 
+                    b.Property<string>("Section")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserOwnerId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
+
+                    b.HasIndex("UserOwnerId");
 
                     b.ToTable("Tickets");
                 });
@@ -325,18 +337,29 @@ namespace TigerTix.Web.Migrations
 
             modelBuilder.Entity("TigerTix.Web.Data.Entities.Ticket", b =>
                 {
-                    b.HasOne("TigerTix.Web.Data.Entities.Event", "TicketEvent")
-                        .WithMany("TicketList")
+                    b.HasOne("TigerTix.Web.Data.Entities.Event", "Event")
+                        .WithMany("Tickets")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TicketEvent");
+                    b.HasOne("TigerTix.Web.Data.Entities.ApplicationUser", "UserOwner")
+                        .WithMany("Tickets")
+                        .HasForeignKey("UserOwnerId");
+
+                    b.Navigation("Event");
+
+                    b.Navigation("UserOwner");
+                });
+
+            modelBuilder.Entity("TigerTix.Web.Data.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("TigerTix.Web.Data.Entities.Event", b =>
                 {
-                    b.Navigation("TicketList");
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }
