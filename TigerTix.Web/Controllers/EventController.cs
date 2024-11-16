@@ -72,8 +72,7 @@ namespace TigerTix.Web.Controllers
         [HttpGet("event/{eventId}/tickets")]
         public IActionResult Tickets(int eventId)
         { 
-            List<Ticket> tickets = _eventRepository.GetEventTickets(eventId);
-            Console.WriteLine($"Number of tickets grabbed: {tickets.Count}");
+            List<Ticket> tickets = _eventRepository.GetEventUnownedTickets(eventId);
             if (tickets.Count == 0 || tickets == null)
             {
                 return NotFound();

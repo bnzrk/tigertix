@@ -21,7 +21,7 @@ namespace TigerTix.Web.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(_config["ConnectionStrings:LocalConnection"]);
+            optionsBuilder.UseSqlServer(_config["ConnectionStrings:DefaultConnection"]);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

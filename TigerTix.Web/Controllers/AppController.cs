@@ -34,10 +34,24 @@ namespace TigerTix.Web.Controllers
             _signInManager = signInManager;
         }            
 
-        public IActionResult ShowUsers()
+        public IActionResult Users()
         {
             var results = from u in _userRepository.GetAllUsers()
                           select u;
+
+            return View(results.ToList());
+        }
+        public IActionResult Events()
+        {
+            var results = from e in _eventRepository.GetAllEvents()
+                          select e;
+
+            return View(results.ToList());
+        }
+        public IActionResult Tickets()
+        {
+            var results = from t in _ticketRepository.GetAllTickets()
+                          select t;
 
             return View(results.ToList());
         }
