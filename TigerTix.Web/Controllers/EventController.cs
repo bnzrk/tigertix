@@ -24,6 +24,41 @@ namespace TigerTix.Web.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet("event/{eventId}")]
+        public IActionResult Index(int eventId)
+        {
+            Event eventListing = _eventRepository.GetEventByID(eventId);
+            if (eventListing == null)
+            {
+                return NotFound();
+            }
+
+            var eventViewModel = new EventViewModel
+            {
+                EventName = eventListing.Name,
+                EventDate = eventListing.Date
+            };
+
+            List<Ticket> tickets = _eventRepository.GetEventUnownedTickets(eventId);
+            var ticketsViewModel = tickets.Select(ticket => new TicketViewModel
+            {
+                Id = ticket.Id,
+                Section = ticket.Section,
+                Row = ticket.Row,
+                SeatNumber = ticket.SeatNumber,
+                Price = ticket.Price
+            }).ToList();
+
+            var model = new EventDetailsViewModel
+            {
+                EventId = eventId,
+                Event = eventViewModel,
+                Tickets = ticketsViewModel
+            };
+
+            return View(model);
+        }
+
         public IActionResult Browse()
         {
             var results = from e in _eventRepository.GetAllEvents()

@@ -1,0 +1,86 @@
+﻿@model EventDetailsViewModel
+@{
+    Layout = "~/Views/Shared/_BannerLayout.cshtml";
+    ViewData["Title"] = "Events Details";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TigerTix: @Model.Event.EventName - @ViewData["Title"]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <div class="column-container">
+        <div class="event-wrapper">
+            <div class="top-row">
+                <!-- Event box -->
+                <div class="event-card width-50">
+                    <img class="event-thumb" src="https://www.collegegridirons.com/wp-content/uploads/2017/03/clem.jpg">
+                    <div class="event-details">
+                        <div class="spaced-flex">
+                            <h1 class="no-margin">@Model.Event.EventName</h1>
+                            <form asp-action="NotifyMe" method="post" asp-route-ticketId="@Model.EventId" class="no-margin">
+                                <input type="submit" class="general-button-purple" value="Notify Me" />
+                            </form>
+                        </div>
+                        <hr class="rounded" />
+                        <p>@Model.Event.EventDate.ToString("dddd, dd MMMM yyyy HH:mm tt")</p><br />
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+                <!-- Ticket box -->
+                <div class="popout-container width-50">
+                    <div class="spaced-flex">
+                        <h2 class="no-vertical-margin left">Tickets</h2>
+                    </div>
+                    <hr class="rounded" />
+                    <div class="column-container">
+                        <!-- Basic ticket options -->
+                        <div class="popout-event-ticket spaced-flex orange-bg">
+                            <div class="left">
+                                <div class="row">
+                                    <p class="bold white">Any Seat</p>
+                                </div>
+                            </div>
+                            <div class="popout-mini row light-orange-bg">
+                                <p class="bold no-margin white">&ensp;&ensp;$0.00&ensp;&ensp;</p>
+                                <form asp-action="BuyTicket" method="post" asp-route-ticketId="@Model.EventId" class="no-margin">
+                                    <input type="submit" class="general-button-orange light-orange-border" value="Buy Ticket" />
+                                </form>
+                            </div>
+                        </div>
+                        <br />
+                        <hr class="rounded" />
+                        <br />
+                        <!-- Individual tickets -->
+                        @foreach (var t in Model.Tickets)
+                        {
+                            <div class="popout-event-ticket spaced-flex">
+                                <div class="left">
+                                    <div class="row">
+                                        <p class="bold">Section:&nbsp</p>@t.Section&ensp;&ensp;
+                                        <p class=bold>Row:&nbsp</p>@t.Row&ensp;&ensp;
+                                        <p class=bold>Seat:&nbsp</p>@t.SeatNumber
+                                    </div>
+                                </div>
+                                <div class="popout-mini row">
+                                    <p class="bold orange no-margin">&ensp;&ensp;$@t.Price&ensp;&ensp;</p>
+                                    <form asp-action="BuyTicket" method="post" asp-route-ticketId="@Model.EventId" class="no-margin">
+                                        <input type="submit" class="general-button-orange box-shadow-mini" value="Buy Ticket" />
+                                    </form>
+                                </div>
+                            </div>
+                            <br />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
