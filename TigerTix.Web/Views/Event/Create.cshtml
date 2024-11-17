@@ -15,17 +15,24 @@
 
     <form asp-action="Create" method="post">
         <div>
-            <label asp-for="EventName"></label>
+            <label asp-for="Name"></label>
             <br />
-            <input asp-for="EventName" class="form-control" />
-            <span asp-validation-for="EventName" class="text-danger"></span>
+            <input asp-for="Name" class="form-control" />
         </div>
-        <br />
         <div>
-            <label asp-for="EventDate"></label>
+            <label asp-for="Description"></label>
             <br />
-            <input asp-for="EventDate" class="form-control" type="datetime-local" />
-            <span asp-validation-for="EventDate" class="text-danger"></span>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>  
+        <div>
+            <label asp-for="Date"></label>
+            <br />
+            <input asp-for="Date" class="form-control" type="datetime-local" />
+        </div>
+        <div>
+            <label asp-for="BasePrice"></label>
+            <br />
+            <input type="number" min="1" step="any" asp-for="BasePrice" class="form-control"/>
         </div>
         <br />
         <input type="submit" value="Create" />
