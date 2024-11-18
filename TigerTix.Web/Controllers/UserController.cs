@@ -48,6 +48,20 @@ namespace TigerTix.Web.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Settings()
+        {
+            if (!UserIsLoggedIn())
+                return RedirectToAction("Index", "Home");
+
+            UserSettingsViewModel model = new UserSettingsViewModel();
+            ApplicationUser user = await GetCurrentUserAsync();
+
+            if (user == null)
+                return RedirectToAction("Index", "Home");
+
+            return View(model);
+        }
+
         public async Task<IActionResult> Tickets()
         {
             if (!UserIsLoggedIn())

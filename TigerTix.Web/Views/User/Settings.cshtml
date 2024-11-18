@@ -1,7 +1,7 @@
-﻿@model ProfileViewModel
+﻿@model UserSettingsViewModel
 @{
     Layout = "~/Views/Shared/_BannerLayout.cshtml";
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Settings";
 }
 
 <!DOCTYPE html>
@@ -16,18 +16,7 @@
 </head>
 <body class="focus-container-background">
     <div class="focus-container ProfileContainer">
-        <h1> Profile </h1>
-        <hr class="rounded" />
-        <h2> CUID </h2>
-        <p id="cuid"> @Model.UserName </p>
-        <h2> First Name </h2>
-        <p id="firstname"> @Model.FirstName </p>
-        <h2> Last Name </h2>
-        <p id="lastname"> @Model.LastName </p>
-        <h2> Email </h2>
-        <p id="email"> @Model.Email </p>
-        <a href="/App/EditProfile" class="">Edit Profile</a>
-        <a asp-action="Settings" asp-controller="User" class="btn btn-secondary">Settings</a>
+        <h1> Settings </h1>
     </div>
 </body>
 </html>
