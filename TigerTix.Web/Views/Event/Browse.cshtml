@@ -14,41 +14,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="~/css/main.css" rel="stylesheet">
 </head>
-<body class = "focus-container-background">
-    <div class="event-header">
-        <h1> Browse Events</h1>
-        <h3> @Model.Events.Count() Results</h3>
+<body>
+    <div class="column-container">
+        <div class="event-header">
+            <h1> Browse Events</h1>
+            <h3> @Model.Events.Count() Results</h3>
+        </div>
+
+        <div class="search-bar">
+            <form method="get" action="/event/browse">
+                <div class="form-group">
+                    <label for="Name">Event Name:</label>
+                    <input type="text" id="Name" name="SearchParameters.Name" placeholder="Search by name" value="@Model.SearchParameters.Name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Date">Date:</label>
+                    <input type="date" id="Date" name="SearchParameters.Date" value="@Model.SearchParameters.Date?.ToString("mm-DD-yyyy")" />
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="search-button">Search</button>
+                    <a href="/event/browse" class="reset-button">Reset</a>
+                </div>
+            </form>
+        </div>
+            @foreach (var e in Model.Events)
+            {
+                <div class="focus-container, event-container">
+                    <h2>Clemson vs. @e.Name&emsp;</h2>
+                    <hr class="rounded"/>
+                    <h3>@e.Date.ToString("dddd, MMMM d, yyyy")&emsp;</h3>
+                    <h3>@e.Description&emsp;</h3>
+                    <h3>Base Price: $@e.BasePrice&emsp;</h3>
+                    <!-- does nothing-->
+                    <a href="/Event/@e.Id" class="getTicketsButton general-button-purple NoHyperlinkUnderline"> Find Tickets </a>
+                </div>
+            }
     </div>
-
-    <div class="search-bar">
-        <form method="get" action="/event/browse">
-            <div class="form-group">
-                <label for="Name">Event Name:</label>
-                <input type="text" id="Name" name="SearchParameters.Name" placeholder="Search by name" value="@Model.SearchParameters.Name" />
-            </div>
-
-            <div class="form-group">
-                <label for="Date">Date:</label>
-                <input type="date" id="Date" name="SearchParameters.Date" value="@Model.SearchParameters.Date?.ToString("mm-DD-yyyy")" />
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" class="search-button">Search</button>
-                <a href="/event/browse" class="reset-button">Reset</a>
-            </div>
-        </form>
-    </div>
-        @foreach (var e in Model.Events)
-        {
-            <div class="focus-container, event-container">
-                <h2>Clemson vs. @e.Name&emsp;</h2>
-                <hr class="rounded"/>
-                <h3>@e.Date.ToString("dddd, MMMM d, yyyy")&emsp;</h3>
-                <h3>@e.Description&emsp;</h3>
-                <h3>Base Price: $@e.BasePrice&emsp;</h3>
-                <!-- does nothing-->
-                <a href="/Event/@e.Id" class="getTicketsButton general-button-purple NoHyperlinkUnderline"> Find Tickets </a>
-            </div>
-        }
 </body>
 </html>
