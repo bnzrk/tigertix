@@ -53,15 +53,18 @@ namespace TigerTix.Web.Data.Entities
             IEnumerable<Event> query = GetAllEvents();
 
             if (!string.IsNullOrEmpty(parameters.Name)) {
-                query = query.Where(e => EF.Functions.Like(e.Name, $"%{parameters.Name}%"));
+                query = query.Where(e => e.Name.Contains(parameters.Name));
             }
 
             if (!string.IsNullOrEmpty(parameters.Description)) {
-                query = query.Where(e => EF.Functions.Like(e.Description, $"%{parameters.Description}%"));
+                query = query.Where(e => e.Description.Contains(parameters.Description));
             }
 
             if (parameters.Date.HasValue) {
-                query = query.Where(e => e.Date >= parameters.Date.Value);
+                DateTime searchDate = parameters.Date.Value.Date;
+                DateTime nextDay = searchDate.AddDays(1);
+
+                query = query.Where(e => e.Date >= searchDate && e.Date < nextDay);
             }
 
             if (parameters.BasePrice.HasValue) {

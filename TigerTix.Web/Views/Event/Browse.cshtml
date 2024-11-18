@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Event>
+﻿@model TigerTix.Web.Models.BrowseEventsViewModel
 @{
     Layout = "~/Views/Shared/_BannerLayout.cshtml";
     ViewData["Title"] = "Browse";
@@ -16,10 +16,29 @@
 </head>
 <body class = "focus-container-background">
     <div class="event-header">
-    <h1> Browse Events</h1>
-    <h3> @Model.Count() Results</h3>
+        <h1> Browse Events</h1>
+        <h3> @Model.Events.Count() Results</h3>
     </div>
-        @foreach (var e in Model)
+
+    <div class="search-bar">
+        <form method="get" action="/event/browse">
+            <div class="form-group">
+                <label for="Name">Event Name:</label>
+                <input type="text" id="Name" name="SearchParameters.Name" placeholder="Search by name" value="@Model.SearchParameters.Name" />
+            </div>
+
+            <div class="form-group">
+                <label for="Date">Date:</label>
+                <input type="date" id="Date" name="SearchParameters.Date" value="@Model.SearchParameters.Date?.ToString("mm-DD-yyyy")" />
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="search-button">Search</button>
+                <a href="/event/browse" class="reset-button">Reset</a>
+            </div>
+        </form>
+    </div>
+        @foreach (var e in Model.Events)
         {
             <div class="focus-container, event-container">
                 <h2>Clemson vs. @e.Name&emsp;</h2>

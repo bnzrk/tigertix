@@ -60,12 +60,13 @@ namespace TigerTix.Web.Controllers
         }
 
         [HttpGet("/event/browse")]
-        public IActionResult Browse()
+        public IActionResult Browse(BrowseEventsViewModel browseEventsModel)
         {
-            var results = from e in _eventRepository.GetAllEvents()
-                          select e;
+            var results = _eventRepository.SearchEvents(browseEventsModel.SearchParameters);
+    
+            browseEventsModel.Events = results;
 
-            return View(results.ToList());
+            return View(browseEventsModel);
         }
 
         [HttpGet("/event/create")]
