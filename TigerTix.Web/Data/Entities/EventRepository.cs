@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace TigerTix.Web.Data.Entities
 {
@@ -45,6 +46,29 @@ namespace TigerTix.Web.Data.Entities
         public bool SaveAll()
         {
             return _context.SaveChanges() > 0;
+        }
+
+        public IEnumerable<Event> SearchEvents(EventSearchParameters parameters)
+        {
+            IEnumerable<Event> query = GetAllEvents();
+
+            if (!string.IsNullOrEmpty(parameters.Name)) {
+                query = query.Where(e => EF.Functions.Like(e.Name, $"%{parameters.Name}%"));
+            }
+
+            if (!string.IsNullOrEmpty(parameters.Description)) {
+                query = query.Where(e => EF.Functions.Like(e.Description, $"%{parameters.Description}%"));
+            }
+
+            if (parameters.Date.HasValue) {
+                query = query.Where(e => e.Date >= parameters.Date.Value);
+            }
+
+            if (parameters.BasePrice.HasValue) {
+                query = query.Where(e => e.BasePrice >= parameters.BasePrice.Value);
+            }
+
+            return query.ToList();
         }
 
         public List<Ticket> GetEventTickets(int eventId)

@@ -20,10 +20,23 @@ namespace TigerTix.Web.Data.Entities
         // Saves all changes to the database and returns whether any entries were affected.
         bool SaveAll();
 
+        public IEnumerable<Event> SearchEvents(EventSearchParameters parameters);
+
         // Returns all tickets for a specific event by id.
         List<Ticket> GetEventTickets(int eventId);
 
         // Returns all tickets without an owner for a specifc event by id.
         List<Ticket> GetEventUnownedTickets(int eventId);
+    }
+}
+
+namespace TigerTix.Web.Data.Entities
+{ 
+    public class EventSearchParameters
+    {
+        public string? Name { get; set; }
+        public string? Description {  get; set; }
+        public DateTime? Date { get; set; }
+        public decimal? BasePrice { get; set; }
     }
 }
