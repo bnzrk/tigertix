@@ -12,14 +12,17 @@ namespace TigerTix.Web.Controllers
 
         private readonly ITicketRepository _ticketRepository;
 
+        private readonly IApplicationUserRepository _userRepository;
+
         private readonly UserManager<ApplicationUser> _userManager;
 
 
-        public EventController(UserManager<ApplicationUser> userManager, IEventRepository eventRepository, ITicketRepository ticketRepository)
+        public EventController(UserManager<ApplicationUser> userManager, IEventRepository eventRepository, ITicketRepository ticketRepository, IApplicationUserRepository userRepository)
         {
             _eventRepository = eventRepository;
             _ticketRepository = ticketRepository;
             _userManager = userManager;
+            _userRepository = userRepository;
         }
 
         [HttpGet("/event/{eventId}")]
@@ -185,7 +188,13 @@ namespace TigerTix.Web.Controllers
                 return NotFound();
             }
 
-            currentUser.Tickets.Add(claimedTicket);
+            //currentUser.Tickets.Add(claimedTicket);
+            //_ticketRepository.UpdateTicket(claimedTicket);
+            //_ticketRepository.SaveAll();
+            //currentUser.ActiveOrder.Tickets.Add(claimedTicket);
+            claimedTicket.IsReserved = true;
+            Order activeOrder = _userRepository.GetActiveOrder(currentUser.Id);
+            activeOrder.Tickets.Add(claimedTicket);
             _ticketRepository.UpdateTicket(claimedTicket);
             _ticketRepository.SaveAll();
 

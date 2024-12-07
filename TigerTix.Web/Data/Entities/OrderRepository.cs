@@ -1,4 +1,6 @@
-﻿namespace TigerTix.Web.Data.Entities
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace TigerTix.Web.Data.Entities
 {
     public class OrderRepository : IOrderRepository
     {
@@ -23,7 +25,10 @@
 
         public Order GetOrderById(int orderId)
         {
-            var order = (from o in _context.Orders where o.Id == orderId select o).FirstOrDefault();
+            var order = _context.Orders
+            .Include(o => o.Tickets)
+            .ThenInclude(t => t.Event)
+            .FirstOrDefault(o => o.Id == orderId);
             return order;
         }
 
