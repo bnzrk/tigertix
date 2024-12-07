@@ -79,7 +79,6 @@ namespace TigerTix.Web.Controllers
         [HttpPost("/event/create")]
         public IActionResult Create(EventViewModel eventModel)
         {
-            Console.WriteLine("Creat page POST.");
             if (ModelState.IsValid)
             {
                 var eventEntity = new Event

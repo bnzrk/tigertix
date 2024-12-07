@@ -24,5 +24,9 @@ namespace TigerTix.Web.Data.Entities
 
         // Returns all tickets owned by a specific user by id.
         Task<List<Ticket>> GetUserTickets(string userId);
+
+        List<Order> GetUserOrders(string userId);
+
+        Order GetActiveOrder(string userId);
     }
 }
