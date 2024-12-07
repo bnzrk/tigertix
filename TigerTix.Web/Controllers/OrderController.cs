@@ -11,61 +11,100 @@ namespace TigerTix.Web.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly ITicketRepository _ticketRepository;
 
         private readonly IApplicationUserRepository _userRepository;
 
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public OrderController(UserManager<ApplicationUser> userManager, IApplicationUserRepository userRepository, IOrderRepository orderRepository)
+        public OrderController(UserManager<ApplicationUser> userManager, IApplicationUserRepository userRepository, IOrderRepository orderRepository, ITicketRepository ticketRepository)
         {
             _userRepository = userRepository;
             _orderRepository = orderRepository;
             _userManager = userManager;
+            _ticketRepository = ticketRepository;
         }
 
-        public IActionResult Success() // Use order view model
+        public IActionResult Success()
         {
             return View();
         }
 
-        public IActionResult Checkout() // Use checkout view model
+        [HttpGet("/order/checkout")]
+        public IActionResult Checkout([FromQuery] string userId, [FromQuery] int orderId)
         {
-            return View();
+            Console.WriteLine($"User = {userId}");
+            Console.WriteLine($"Order = {orderId}");
+
+            CheckoutViewModel model = new CheckoutViewModel()
+            {
+                UserId = userId,
+                OrderId = orderId
+            };
+
+            return View(model);
         }
 
         [HttpPost("/order/checkout")]
-        public IActionResult Checkout(int model, string userId, int orderId) // user and order id in model instead
+        public async Task<IActionResult> Checkout(CheckoutViewModel model)
         {
+            Console.WriteLine("Checkout POST");
+            Console.WriteLine($"User = {model.UserId}");
+            Console.WriteLine($"Order = {model.OrderId}");
+
             // 1. Retrive order
-            Order activeOrder = _userRepository.GetActiveOrder(userId);
-            if (activeOrder != _orderRepository.GetOrderById(orderId))
+            ApplicationUser orderUser = await _userRepository.GetUserByIdAsync(model.UserId);
+            Order activeOrder = _userRepository.GetActiveOrder(model.UserId);
+            if (orderUser == null || activeOrder != _orderRepository.GetOrderById(model.OrderId))
             {
+                Console.WriteLine("BAD");
                 return BadRequest();
             }
+
+            Console.WriteLine("Processing payment...");
 
             // 2. Process payment
             var result = ProcessPayment(model);
 
             if (!result)
-                return BadRequest(); // FIXME: return page with error message
+                return BadRequest();
 
             // 3. Complete order (move order to user's completed order list, set active to false)
+            Console.WriteLine("Completing the order...");
             CompleteOrder(activeOrder);
 
-            // 4. TODO: Initialize a new empty order
-
-            // 5. Redirect to payment success/summary page
-            return RedirectToAction("Success", "Order", new { orderId = activeOrder.Id });
+            // 4. Redirect to payment success/summary page
+            //return RedirectToAction("Success", "Order", new { orderId = activeOrder.Id });
+            Console.WriteLine("Order completed successfully.");
+            return RedirectToAction("Index", "Home");
         }
 
-        public bool ProcessPayment(int model) // payment info view model instead of int
+        public bool ProcessPayment(CheckoutViewModel model) // payment info view model instead of int
         {
             return true;
         }
 
         public void CompleteOrder(Order order)
         {
+            ApplicationUser orderUser = order.User;
+
+            if (orderUser == null)
+            {
+                Console.WriteLine("Error completing order!");
+                return;
+            }
+
+            // Remove active status and add all tickets to user
             order.IsActive = false;
+            foreach (var t in order.Tickets)
+            {
+                orderUser.Tickets.Add(t);
+                _ticketRepository.UpdateTicket(t);
+            }
+            _ticketRepository.SaveAll();
+
+            // Initialize a new empty order for the user
+            order.User.Orders.Add(new Order() { IsActive = true });
             _orderRepository.UpdateOrder(order);
         }
 
@@ -82,6 +121,7 @@ namespace TigerTix.Web.Controllers
             // Create a view model from the active order
             OrderViewModel model = new OrderViewModel();
             model.Id = activeOrder.Id;
+            model.UserId = currentUser.Id;
             model.Tickets = activeOrder.Tickets.Select(ticket => new OrderTicketViewModel
             {
                 Id = ticket.Id,

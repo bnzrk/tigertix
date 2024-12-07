@@ -26,6 +26,7 @@ namespace TigerTix.Web.Data.Entities
         public Order GetOrderById(int orderId)
         {
             var order = _context.Orders
+            .Include(o => o.User)
             .Include(o => o.Tickets)
             .ThenInclude(t => t.Event)
             .FirstOrDefault(o => o.Id == orderId);

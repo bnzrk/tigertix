@@ -68,7 +68,8 @@ namespace TigerTix.Web.Data.Entities
             .Include(u => u.Orders)
             .Where(u => u.Id == userId)
             .SelectMany(u => u.Orders)
-            .Include(u => u.Tickets)
+            .Include(o => o.User)
+            .Include(o => o.Tickets)
             .ThenInclude(t => t.Event)
             .FirstOrDefault(o => o.IsActive);
             return activeOrder;

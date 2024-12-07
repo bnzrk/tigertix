@@ -1,7 +1,7 @@
-﻿@model OrderViewModel
+﻿@model CheckoutViewModel
 @{
     Layout = "~/Views/Shared/_BannerLayout.cshtml";
-    ViewData["Title"] = "My Cart";
+    ViewData["Title"] = "Order Checkout";
 }
 
 <!DOCTYPE html>
@@ -15,17 +15,11 @@
     <link href="~/css/main.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Should show order total and possbile discount as well -->
-    <table>
-        @foreach (var entry in Model.Tickets)
-        {
-            <tr>
-                <td>@entry.EventName</td>
-                <td>@entry.Id</td>
-                <td>@entry.Price</td>
-            </tr>
-        }
-    </table>
-    <a href="/order/checkout?userId=@Model.UserId&orderId=@Model.Id" class="getTicketsButton general-button-orange NoHyperlinkUnderline"> Checkout</a>
+    <form asp-action="Checkout" method="post">
+        <!-- Add fields for payment info here -->
+        <input asp-for="UserId" class="form-control" type="hidden">
+        <input asp-for="OrderId" class="form-control" type="hidden">
+        <input type="submit" value="Purchase Tickets"/>
+    </form>
 </body>
 </html>
