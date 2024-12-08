@@ -13,16 +13,19 @@ namespace TigerTix.Web.Controllers
 
         private readonly ITicketRepository _ticketRepository;
 
+        private readonly IOrderRepository _orderRepository;
+
         private readonly UserManager<ApplicationUser> _userManager;
 
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public UserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IApplicationUserRepository userRepository, ITicketRepository ticketRepository)
+        public UserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IApplicationUserRepository userRepository, ITicketRepository ticketRepository, IOrderRepository orderRepository)
         {
             _userRepository = userRepository;
             _ticketRepository = ticketRepository;
             _userManager = userManager;
             _signInManager = signInManager;
+            _orderRepository = orderRepository;
         }
 
         /************************
@@ -162,6 +165,7 @@ namespace TigerTix.Web.Controllers
             var result = await _userRepository.SaveUserAsync(user, model.Password);
             if (result.Succeeded)
             {
+                await InitializeUserOrder(user);
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
             }
@@ -201,6 +205,15 @@ namespace TigerTix.Web.Controllers
         protected bool UserIsLoggedIn()
         {
             return User.Identity?.IsAuthenticated == true;
+        }
+
+        protected async Task<Order> InitializeUserOrder(ApplicationUser user)
+        {
+            Order order = new Order();
+            order.IsActive = true;
+            user.Orders.Add(order);
+            await _userRepository.UpdateUserAsync(user);
+            return order;
         }
     }
 }

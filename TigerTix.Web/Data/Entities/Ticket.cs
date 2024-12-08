@@ -11,5 +11,6 @@ namespace TigerTix.Web.Data.Entities
         public Event Event { get; set; }
         public string? UserOwnerId { get; set; }
         public ApplicationUser UserOwner { get; set; }
+        public bool IsReserved { get; set; } = false;
     }
 }

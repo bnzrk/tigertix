@@ -86,7 +86,7 @@ namespace TigerTix.Web.Data.Entities
             return _context.Events
             .Where(e => e.Id == eventId)
             .SelectMany(e => e.Tickets)
-            .Where(t => t.UserOwner == null)
+            .Where(t => t.IsReserved == false)
             .ToList();
         }
     }

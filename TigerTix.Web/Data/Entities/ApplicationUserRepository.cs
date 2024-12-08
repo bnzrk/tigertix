@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace TigerTix.Web.Data.Entities
 {
@@ -51,6 +52,27 @@ namespace TigerTix.Web.Data.Entities
             .SelectMany(u => u.Tickets)
             .Include(t => t.Event) // Include Event navigation property so this can be accessed
             .ToListAsync();
+        }
+
+        public List<Order> GetUserOrders(string userId)
+        {
+            return _context.Users
+            .Where(u => u.Id == userId)
+            .SelectMany(u => u.Orders)
+            .ToList();
+        }
+
+        public Order GetActiveOrder(string userId)
+        {
+            var activeOrder = _context.Users
+            .Include(u => u.Orders)
+            .Where(u => u.Id == userId)
+            .SelectMany(u => u.Orders)
+            .Include(o => o.User)
+            .Include(o => o.Tickets)
+            .ThenInclude(t => t.Event)
+            .FirstOrDefault(o => o.IsActive);
+            return activeOrder;
         }
     }
 }
