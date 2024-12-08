@@ -52,7 +52,7 @@
                             <div class="popout-mini row light-orange-bg">
                                 <p class="bold no-margin white">&ensp;&ensp;$@Model.Event.BasePrice&ensp;&ensp;</p>
                                 <form asp-action="BuyAnyTicket" method="post" asp-route-ticketId="@Model.EventId" class="no-margin">
-                                    <input type="submit" class="general-button-orange light-orange-border" value="Buy Ticket" />
+                                    <input type="submit" class="general-button-orange light-orange-border" value="Add to Cart" />
                                 </form>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                                 <div class="popout-mini row">
                                     <p class="bold orange no-margin">&ensp;&ensp;$@t.Price&ensp;&ensp;</p>
                                     <form asp-action="ClaimTicket" method="post" asp-route-eventId="@Model.Event.Id" asp-route-ticketId="@t.Id" class="no-margin">
-                                        <input type="submit" class="general-button-orange box-shadow-mini" value="Buy Ticket" />
+                                        <input type="submit" class="general-button-orange box-shadow-mini" value="Add to Cart" />
                                     </form>
                                 </div>
                             </div>

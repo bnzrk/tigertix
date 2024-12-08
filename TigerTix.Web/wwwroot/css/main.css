@@ -888,3 +888,74 @@ hr.rounded
     color: white;
     text-decoration: none;
 }
+
+
+/* Container for the cart */
+.focus-container.CartContainer {
+    padding: 20px;
+    max-width: 70vw;
+    margin-left: 20px;
+}
+
+/* List that holds each ticket item */
+.ticket-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Ticket item wrapper */
+.ticket-item {
+    display: flex;
+    flex-direction: column; /* Stack the ticket info and remove link */
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Add a line between each item */
+}
+
+/* Ticket info styles (event name, ticket id, price) */
+.ticket-info {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+/* Right-align the price */
+.right-align {
+    text-align: right;
+    flex-grow: 1; /* Makes sure the price aligns to the far right */
+}
+
+/* Remove link styling */
+.remove-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+    .remove-link a {
+        text-decoration: none;
+        color: red;
+    }
+
+        .remove-link a:hover {
+            text-decoration: underline;
+        }
+
+/* Style for the total price */
+h2 {
+    margin-top: 20px;
+}
+
+.focus-container.checkout-box{
+    max-width: 15vw;
+    position: absolute;
+    right: 20px;
+    top: 100px;
+}
+.checkout-box h3 {
+    padding: 10px;
+    text-align: center;
+}
+.checkout-box a{
+    margin-left: 25px;
+}
