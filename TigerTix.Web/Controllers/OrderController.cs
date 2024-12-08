@@ -25,9 +25,10 @@ namespace TigerTix.Web.Controllers
             _ticketRepository = ticketRepository;
         }
 
-        public IActionResult Success()
+        [HttpGet("/order/success")]
+        public IActionResult Success([FromQuery] int orderId)
         {
-            return View();
+            return View(orderId);
         }
 
         [HttpGet("/order/checkout")]
@@ -76,7 +77,8 @@ namespace TigerTix.Web.Controllers
             // 4. Redirect to payment success/summary page
             //return RedirectToAction("Success", "Order", new { orderId = activeOrder.Id });
             Console.WriteLine("Order completed successfully.");
-            return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Success", "Order", new { orderId = activeOrder.Id });
         }
 
         public bool ProcessPayment(CheckoutViewModel model) // payment info view model instead of int
