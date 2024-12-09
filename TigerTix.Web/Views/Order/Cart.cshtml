@@ -15,35 +15,36 @@
     <link href="~/css/main.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Should show order total and possbile discount as well -->
-<div class="focus-container CartContainer">
-    <ul class="ticket-list">
-                <li class="ticket-item header-row">
-            <div class="ticket-info">
-                <span class="header-name">Event Name - ID</span>
-                <span class="header-price right-align">Price</span>
-            </div>
-        </li>
-            @foreach (var entry in Model.Tickets)
-            {
-                <li class="ticket-item">
+    <div class="column-container">
+        <div class="focus-container CartContainer">
+            <ul class="ticket-list">
+                        <li class="ticket-item header-row">
                     <div class="ticket-info">
-                            <span class="event-id">@entry.EventName - @entry.Id</span>
-                        <span class="ticket-price right-align">$@entry.Price</span>
-                    </div>
-                    <div class="remove-link">
-                        <a href="/order/cart">Remove from cart</a>
+                        <span class="header-name">Event Name - ID</span>
+                        <span class="header-price right-align">Price</span>
                     </div>
                 </li>
-            }
-    </ul>
+                    @foreach (var entry in Model.Tickets)
+                    {
+                        <li class="ticket-item">
+                            <div class="ticket-info">
+                                    <span class="event-id">@entry.EventName - @entry.Id</span>
+                                <span class="ticket-price right-align">$@entry.Price</span>
+                            </div>
+                            <div class="remove-link">
+                                <a href="/order/cart">Remove from cart</a>
+                            </div>
+                        </li>
+                    }
+            </ul>
 
-    <h2>Total Price (@Model.Tickets.Count Tickets): $@Model.Tickets.Sum(ticket => ticket.Price)</h2>
-</div>
+            <h2>Total Price (@Model.Tickets.Count Tickets): $@Model.Tickets.Sum(ticket => ticket.Price)</h2>
+        </div>
 
         <div class="focus-container checkout-box">
             <h3>Total Price: $@Model.Tickets.Sum(ticket => ticket.Price)</h3>
                 <a href="/order/checkout?userId=@Model.UserId&orderId=@Model.Id" class="general-button-orange NoHyperlinkUnderline"> Proceed to Checkout</a>
         </div>
+    </div>
 </body>
 </html>
